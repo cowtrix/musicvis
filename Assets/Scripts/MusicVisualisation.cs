@@ -22,8 +22,15 @@ public class MusicVisualisation : MonoBehaviour
 
     public void Think(float time, MusicState currentState)
     {
-        foreach (var musicVisualisation in _visualisations)
+        for (var i = 0; i < _visualisations.Count; i++)
         {
+            var musicVisualisation = _visualisations[i];
+            if (musicVisualisation == null)
+            {
+                _visualisations.RemoveAt(i);
+                i--;
+                continue;
+            }
             musicVisualisation.Think(Strength, time, currentState);
         }
     }

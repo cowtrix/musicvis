@@ -21,7 +21,10 @@ namespace Lasp
 
         void OnDestroy()
         {
-            _callback();
+            if (_callback != null)
+            {
+                _callback();
+            }
         }
     }
 }

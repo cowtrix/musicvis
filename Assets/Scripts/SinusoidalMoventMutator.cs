@@ -13,10 +13,9 @@ public class SinusoidalMoventMutator : MusicVisualisationComponent
 
     private float _currentTime = 0;
 
-    public override void Think(float strenghth, float time, MusicState currentState)
+    protected override void ThinkInternal(float strenghth, float time, MusicState currentState)
     {
-        Value = GetValFromSampleMode(Mode, currentState, Wavelength);
-        _currentTime += Time.deltaTime * Value * Frequency;
-        transform.position = Mathf.Sin(_currentTime) * Vector * Multiplier;
+        _currentTime += Time.deltaTime * Value.GetValue() * Frequency;
+        transform.position += transform.rotation * (Mathf.Sin(_currentTime) * Vector * Multiplier);
     }
 }

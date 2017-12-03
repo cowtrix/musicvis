@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class MusicState
 {
-    public float Peak, RMS;
+    public float Peak;
+    public float RMS;
     public float[] Wavelength = new float[512];
 }
 

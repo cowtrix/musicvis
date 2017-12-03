@@ -4,28 +4,29 @@
 using UnityEditor;
 
 [CustomEditor(typeof(MusicVisualisationComponent), true)]
+[CanEditMultipleObjects]
 public class MusicVisualisationComponentGUI : Editor
 {
     private float _max = float.MinValue, _min = float.MaxValue;
-    private SerializedProperty _waveLength, _mode;
-
     public override void OnInspectorGUI()
     {
-        var msc = target as MusicVisualisationComponent;
-
-        EditorGUILayout.LabelField("");
-        if (msc.Value > _max)
+        if (Application.isPlaying)
         {
-            _max = msc.Value;
+            var msc = target as MusicVisualisationComponent;
+            EditorGUILayout.LabelField("");
+            var val = msc.Value.GetValue();
+            if (val > _max)
+            {
+                _max = val;
+            }
+            if (val < _min)
+            {
+                _min = val;
+            }
+            var nv = (val - _min) / Mathf.Max(_max - _min, float.Epsilon);
+            var r = GUILayoutUtility.GetLastRect();
+            EditorGUI.ProgressBar(r, nv, "Value");
         }
-        if (msc.Value < _min)
-        {
-            _min = msc.Value;
-        }
-        var nv = (msc.Value - _min) / Mathf.Max(_max - _min, float.Epsilon);
-        var r = GUILayoutUtility.GetLastRect();
-        EditorGUI.ProgressBar(r, nv, "Value");
-
         DrawDefaultInspector();
     }
 }
@@ -34,14 +35,22 @@ public class MusicVisualisationComponentGUI : Editor
 
 public abstract class MusicVisualisationComponent : MonoBehaviour
 {
-    public float Value { get; protected set; }
+    public float TimeOffset = 0;
+    public ESampleMode SampleMode;
+    public int AveragingSteps = 10;
+    public AveragedValue Value { get; protected set; }
+    [Range(0, 1)]
+    public float TargetWavelength;
 
-    public abstract void Think(float strenghth, float time, MusicState currentState);
+    private void Awake()
+    {
+        Value = new AveragedValue(AveragingSteps);
+    }
 
-    protected static float GetValFromSampleMode(ESampleMode mode, MusicState currentState, float wavelength = 0)
+    public void Think(float strength, float time, MusicState currentState)
     {
         float val = 0;
-        switch (mode)
+        switch (SampleMode)
         {
             case ESampleMode.RMS:
                 val = currentState.RMS;
@@ -50,10 +59,20 @@ public abstract class MusicVisualisationComponent : MonoBehaviour
                 val = currentState.Peak;
                 break;
             case ESampleMode.Wavelength:
-                var index = Mathf.FloorToInt(wavelength * (currentState.Wavelength.Length - 1));
+                var index = Mathf.FloorToInt(TargetWavelength * (currentState.Wavelength.Length - 1));
                 val = currentState.Wavelength[index];
                 break;
+            case ESampleMode.Time:
+                val = time;
+                break;
+            case ESampleMode.DeltaTime:
+                val = Time.deltaTime;
+                break;
         }
-        return val;
+        Value.Add(val);
+        time += TimeOffset;
+        ThinkInternal(strength, time, currentState);
     }
+
+    protected abstract void ThinkInternal(float strenghth, float time, MusicState currentState);
 }

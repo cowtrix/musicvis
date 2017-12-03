@@ -3,4 +3,6 @@
     RMS,
     Peak,
     Wavelength,
+    Time,
+    DeltaTime,
 }
