@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2017
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicVis", "MusicVis.csproj", "{99D0481A-5522-DD5E-8485-48069D1A046C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicVis.Plugins", "MusicVis.Plugins.csproj", "{0561A240-EF97-9979-E30E-04379AF49ACC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicVis", "MusicVis.csproj", "{99D0481A-5522-DD5E-8485-48069D1A046C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicVis.Editor", "MusicVis.Editor.csproj", "{9E91EB04-6429-1B9A-4FC1-73FBAB2984D4}"
 EndProject
@@ -15,14 +15,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{99D0481A-5522-DD5E-8485-48069D1A046C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{99D0481A-5522-DD5E-8485-48069D1A046C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{99D0481A-5522-DD5E-8485-48069D1A046C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{99D0481A-5522-DD5E-8485-48069D1A046C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0561A240-EF97-9979-E30E-04379AF49ACC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0561A240-EF97-9979-E30E-04379AF49ACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0561A240-EF97-9979-E30E-04379AF49ACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0561A240-EF97-9979-E30E-04379AF49ACC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99D0481A-5522-DD5E-8485-48069D1A046C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99D0481A-5522-DD5E-8485-48069D1A046C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99D0481A-5522-DD5E-8485-48069D1A046C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99D0481A-5522-DD5E-8485-48069D1A046C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9E91EB04-6429-1B9A-4FC1-73FBAB2984D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9E91EB04-6429-1B9A-4FC1-73FBAB2984D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E91EB04-6429-1B9A-4FC1-73FBAB2984D4}.Release|Any CPU.ActiveCfg = Release|Any CPU

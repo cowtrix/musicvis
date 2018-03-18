@@ -22,7 +22,7 @@ public class MaterialPropertyBlockMutator : MusicVisualisationComponent
         _renderer = GetComponent<Renderer>();
     }
 
-    protected override void ThinkInternal(float strenghth, float time, MusicState currentState)
+    protected override void ThinkInternal(float time, MusicVisualisation musicVisualisation)
     {
         _currentTime = (_currentTime + Time.deltaTime) * Value.GetValue() * Multiplier;
         _currentTime = _currentTime.Frac();

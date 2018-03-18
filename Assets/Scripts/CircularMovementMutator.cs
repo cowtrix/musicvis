@@ -11,9 +11,8 @@ public class CircularMovementMutator : MusicVisualisationComponent
     
     private float _angle;
 
-    protected override void ThinkInternal(float strenghth, float time, MusicState currentState)
+    protected override void ThinkInternal(float time, MusicVisualisation musicVisualisation)
     {
-        //Value = GetValFromSampleMode(Mode, currentState, time, Wavelength) * Multiplier;
         _angle = (Value.GetValue() + Offset);
         transform.position = transform.parent.position + new Vector3(Mathf.Cos(_angle) * Radius, Mathf.Sin(_angle) * Radius);
     }

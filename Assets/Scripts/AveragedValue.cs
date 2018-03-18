@@ -4,7 +4,7 @@ using System.Linq;
 public class AveragedValue
 {
     private Queue<float> _values;
-    public readonly int Size;
+    public int Size;
 
     public AveragedValue(int steps)
     {
@@ -12,13 +12,15 @@ public class AveragedValue
         _values = new Queue<float>(steps);
     }
 
+    public float Multiplier = 1;
+
     public float GetValue()
     {
-        if (_values.Count == 0)
+        if (_values.Count == 0 || _values.Count < Size)
         {
             return 0;
         }
-        return _values.Average();
+        return _values.Average() * Multiplier;
     }
 
     public void Add(float val)
