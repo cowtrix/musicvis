@@ -11,6 +11,7 @@ public abstract class BaseMutatorEffect : IMutatorEffector
 	{
 		public Component Component;
 		public string FieldName;
+		[NonSerialized]
 		public FieldInfo FieldInfo;
 	}
 
@@ -67,6 +68,35 @@ public class PipeMutatorEffect : BaseMutatorEffect
 	public override string ToString()
 	{
 		return "Pipe " + _lastStrength;
+	}
+}
+
+[Name("Linear/Remapped Pipe")]
+[Serializable]
+public class RemappedPipeMutatorEffect : BaseMutatorEffect
+{
+	public AnimationCurve Mapping = AnimationCurve.Linear(0, 1, 1, 1);
+	public List<Mutator> Mutators = new List<Mutator>();
+
+	float _lastStrength;
+
+	public override void Tick(float strength)
+	{
+		_lastStrength = Mapping.Evaluate(strength);
+		foreach (var mutator in Mutators)
+		{
+			if(mutator == null)
+			{
+				continue;
+			}
+			mutator.Tick(_lastStrength);
+		}
+		ApplyReflection(_lastStrength);
+	}
+
+	public override string ToString()
+	{
+		return "Map Pipe " + _lastStrength;
 	}
 }
 

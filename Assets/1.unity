@@ -283,6 +283,30 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 1255019983}
     - {fileID: 1010077541}
+  - AssemblyQualifiedName: VisComponent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    JsonText: '{"Name":"Knob1 - Grid Size","Weight":1.0,"Listener":{"Value":0.0,"Min":0.0,"Max":1.0,"UseMidi":true,"MidiChannel":"Ch1","MidiIndex":0,"$type":"ExplicitListener"},"MutatorEffectors":[{"Mapping":{"keys":[{"time":0.0,"value":1.0,"tangentMode":34,"inTangent":1.0,"outTangent":1.0},{"time":1.0,"value":2.0,"tangentMode":34,"inTangent":1.0,"outTangent":1.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"Mutators":[],"Reflections":[{"Component":1,"FieldName":"SizeMultiplier"}],"$type":"RemappedPipeMutatorEffect"}]}'
+    SerializedObjects:
+    - {fileID: 0}
+    - {fileID: 1294478112}
+  - AssemblyQualifiedName: VisComponent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    JsonText: '{"Name":"Knob2 - Wire Size","Weight":1.0,"Listener":{"Value":0.3,"Min":0.0,"Max":1.0,"UseMidi":true,"MidiChannel":"Ch2","MidiIndex":0,"$type":"ExplicitListener"},"MutatorEffectors":[{"Mapping":{"keys":[{"time":0.0,"value":0.0,"tangentMode":34,"inTangent":2.0,"outTangent":2.0},{"time":1.0,"value":2.0,"tangentMode":34,"inTangent":2.0,"outTangent":2.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"Mutators":[],"Reflections":[{"Component":1,"FieldName":"Multiplier"}],"$type":"RemappedPipeMutatorEffect"}]}'
+    SerializedObjects:
+    - {fileID: 0}
+    - {fileID: 1255019983}
+  - AssemblyQualifiedName: VisComponent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    JsonText: '{"Name":"Knob3 - TriBall Size","Weight":1.0,"Listener":{"Value":0.25,"Min":0.0,"Max":1.0,"UseMidi":true,"MidiChannel":"Ch3","MidiIndex":0,"$type":"ExplicitListener"},"MutatorEffectors":[{"Mapping":{"keys":[{"time":0.0,"value":0.0,"tangentMode":34,"inTangent":4.0,"outTangent":4.0},{"time":1.0,"value":4.0,"tangentMode":34,"inTangent":4.0,"outTangent":4.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"Mutators":[],"Reflections":[{"Component":1,"FieldName":"Multiplier"}],"$type":"RemappedPipeMutatorEffect"}]}'
+    SerializedObjects:
+    - {fileID: 0}
+    - {fileID: 1010077541}
+  - AssemblyQualifiedName: VisComponent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    JsonText: '{"Name":"Knob4 - GridAmplitude","Weight":1.0,"Listener":{"Value":0.0,"Min":0.0,"Max":1.0,"UseMidi":true,"MidiChannel":"Ch4","MidiIndex":0,"$type":"ExplicitListener"},"MutatorEffectors":[{"Mapping":{"keys":[{"time":0.0,"value":50.0,"tangentMode":34,"inTangent":350.0,"outTangent":350.0},{"time":1.0,"value":400.0,"tangentMode":34,"inTangent":350.0,"outTangent":350.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"Mutators":[],"Reflections":[{"Component":1,"FieldName":"ValueMultiplier"}],"$type":"RemappedPipeMutatorEffect"}]}'
+    SerializedObjects:
+    - {fileID: 0}
+    - {fileID: 1294478112}
 --- !u!114 &167495364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,71 +501,6 @@ MonoBehaviour:
     Color2: {r: 0.92910826, g: 0.63478124, b: 0.5927582, a: 1}
   TimePerTemplate: 150
   Speed: 0.1
---- !u!1 &548535975
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 548535977}
-  - component: {fileID: 548535976}
-  m_Layer: 0
-  m_Name: Directional light
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!108 &548535976
-Light:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 548535975}
-  m_Enabled: 1
-  serializedVersion: 8
-  m_Type: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 10
-  m_SpotAngle: 30
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 0
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_Lightmapping: 4
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
---- !u!4 &548535977
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 548535975}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0.28125, y: 7.7041745, z: -5.887407}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &600245441
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,7 +588,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27ca47205624cd6a0277fa86c49ba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Scale: {x: 0, y: 10}
+  Scale: {x: 0, y: 30}
+  Multiplier: 1
 --- !u!199 &1010077542
 ParticleSystemRenderer:
   serializedVersion: 3
@@ -738,7 +698,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -805414964
+  randomSeed: 1417758415
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3947,7 +3907,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27ca47205624cd6a0277fa86c49ba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Scale: {x: 0, y: 50}
+  Scale: {x: 0, y: 20}
+  Multiplier: 1
 --- !u!114 &1255019984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4012,6 +3973,7 @@ MonoBehaviour:
   FocalPoint: {fileID: 1294478111}
   ValueMultiplier: 200
   Size: {x: 60, y: 80}
+  SizeMultiplier: 1
   Rows: 40
   Columns: 40
   BufferSize: 500
@@ -4131,7 +4093,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1210680215
+  randomSeed: 1823806934
   InitialModule:
     serializedVersion: 3
     enabled: 1

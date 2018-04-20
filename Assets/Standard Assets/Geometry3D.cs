@@ -1,7 +1,6 @@
 ﻿//#define CUSTOMDEBUG
 
 using System;
-using UnityEditor;
 using UnityEngine;
 
 public static class Geometry3D

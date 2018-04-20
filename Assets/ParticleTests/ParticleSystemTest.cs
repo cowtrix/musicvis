@@ -11,6 +11,7 @@ public class ParticleSystemTest : Mutator
 
 	public float ValueMultiplier = 1;
 	public Vector2 Size = new Vector2 (10, 10);
+	public float SizeMultiplier = 1;
 	public int Rows = 10;
 	public int Columns = 10;
 	public int BufferSize = 1000;
@@ -26,7 +27,8 @@ public class ParticleSystemTest : Mutator
 	public override void Tick(float strength)
 	{
 		System.maxParticles = Rows * Columns;
-		float maxDist = Mathf.Sqrt(Rows * Size.x * Columns * Size.y);
+		Vector2 realSize = SizeMultiplier * Size;
+		float maxDist = Mathf.Sqrt(Rows * realSize.x * Columns * realSize.y);
 		while (_buffer.Count > BufferSize)
 		{
 			_buffer.RemoveAt(0);
@@ -47,8 +49,9 @@ public class ParticleSystemTest : Mutator
 		}
 		int numParticlesAlive = System.GetParticles(_particles);
 
-		Vector2 min = transform.position.xz() - Size / 2;
-		Vector2 step = new Vector3(Size.x / (Rows-1), Size.y / (Columns-1));
+		
+		Vector2 min = transform.position.xz() - realSize / 2;
+		Vector2 step = new Vector3(realSize.x / (Rows-1), realSize.y / (Columns-1));
 		int rowCounter = 0;
 		int columnCounter = 0;
 		for (int i = 0; i < numParticlesAlive; i++)
