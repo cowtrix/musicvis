@@ -1,42 +1,74 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MadMaps.Common.Serialization;
+using System;
 
 /// <summary>
 /// Root class for a single music visualisation
 /// </summary>
-public class MusicVisualisation : MonoBehaviour
+public class MusicVisualisation : MonoBehaviour, ISerializationCallbackReceiver
 {
     [Range(0, 1)]
     public float Strength = 1;
     public float Time;
-    public MusicState CurrentState;
-
-    private readonly List<MusicVisualisationComponent> _visualisations = new List<MusicVisualisationComponent>();
-
+    [HideInInspector]
+    public MusicState CurrentState = new MusicState();    
     public ColorTemplateManager ColorTemplateManager;
 
-    private void Awake()
-    {
-        _visualisations.Clear();
-        _visualisations.AddRange(GetComponentsInChildren<MusicVisualisationComponent>());
-    }
+    public List<VisComponent> Components = new List<VisComponent>();
+    [HideInInspector]
+    public List<DerivedComponentJsonDataRow> ComponentsJSON = new List<DerivedComponentJsonDataRow>();
 
     public void Think(float time, MusicState currentState)
     {
         Time = time;
         CurrentState = currentState;
 
-        for (var i = 0; i < _visualisations.Count; i++)
+        for (var i = 0; i < Components.Count; i++)
         {
-            var musicVisualisation = _visualisations[i];
+            var musicVisualisation = Components[i];
             if (musicVisualisation == null)
             {
-                _visualisations.RemoveAt(i);
+                Components.RemoveAt(i);
                 i--;
                 continue;
             }
             musicVisualisation.Think(this);
         }
     }
+
+    public void OnBeforeSerialize()
+    {
+        ComponentsJSON.Clear();
+        foreach(var component in Components)
+        {
+            if(component == null)
+            {
+                ComponentsJSON.Add(null);
+                continue;
+            }
+            var newRow = new DerivedComponentJsonDataRow();
+            newRow.AssemblyQualifiedName = component.GetType().AssemblyQualifiedName;
+            newRow.SerializedObjects = new List<UnityEngine.Object>();  
+            newRow.JsonText = JSONSerializer.Serialize(component.GetType(), component, false, newRow.SerializedObjects);
+            ComponentsJSON.Add(newRow);
+        }
+    }
+
+    public void OnAfterDeserialize()
+    {
+        Components.Clear();
+        foreach(var row in ComponentsJSON)
+        {
+            if(row == null)
+            {
+                Components.Add(null);
+                continue;
+            }
+            var newObj = JSONSerializer.Deserialize(Type.GetType(row.AssemblyQualifiedName), row.JsonText, row.SerializedObjects) as VisComponent;
+            Components.Add(newObj);
+        }         
+    }
+
 }

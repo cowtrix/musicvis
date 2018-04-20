@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <RootNamespace></RootNamespace>
+    <ProjectGuid>{AF533A89-E86F-1540-E4C7-AF129124B56C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <BaseDirectory>Assets</BaseDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_5_6_3;UNITY_5_6;UNITY_5;UNITY_64;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_GENERICS;ENABLE_PVR_GI;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_RUNTIME_NAVMESH_BUILDING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_NATIVE_ARRAY;INCLUDE_DYNAMIC_GI;INCLUDE_GI;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_SCRIPTING_NEW_CSHARP_COMPILER;ENABLE_VIDEO;UNITY_STANDALONE_LINUX;UNITY_STANDALONE;UNITY_STANDALONE_LINUX_API;ENABLE_SUBSTANCE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLUSTERINPUT;ENABLE_VR;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_2_0_SUBSET;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_LINUX;ENABLE_NATIVE_ARRAY_CHECKS;UNITY_TEAM_LICENSE;UNITY_POST_PROCESSING_STACK_V2</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Temp\bin\Release\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UnityEngine">
+      <HintPath>/opt/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>/opt/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\Custom Plugins\Common\BilinearSampleUtility.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\ColorExtensions.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\ColorMinMax.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\ColorUtility.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\CompositionDictionary.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\ComputeShaderPool.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\CurveExtensions.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\DataInspector.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\DebugHelper.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\DelegateExtensions.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\EditorCoroutineManager.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\EditorExtensions.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\EditorGUILayoutX.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\FloatMinMax.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\GUIGradientField.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\GUIResources.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\GameObjectExtensions.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\GenericEditor\EditorAttributes.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\GenericEditor\GenericDrawer.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\GenericEditor\GenericEditor.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\GenericEditor\MinAttributeDrawer.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\GizmoExtensions.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\HandleExtensions.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\LayerMaskFieldUtility.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\LevelSingleton.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\ListExtensions.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Mathfx.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\MeshNormalCalculator.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\MeshTangentCalculator.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\MiscUtilities.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\ObjectBounds.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\ObjectExtensions.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\SceneViewEditorWindow.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serializable2DArray.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serializable2DByteArray.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serializable2DFloatArray.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serializable2DIntArray.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\DerivedComponentJsonDataRow.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Aot\fsAotCompilationManager.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Aot\fsAotConfiguration.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Aot\fsAotVersionInfo.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Aot\fsIAotConverter.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Converters\Unity\AnimationCurve_DirectConverter.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Converters\Unity\Bounds_DirectConverter.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Converters\Unity\GUIStyleState_DirectConverter.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Converters\Unity\GUIStyle_DirectConverter.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Converters\Unity\Gradient_DirectConverter.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Converters\Unity\Keyframe_DirectConverter.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Converters\Unity\LayerMask_DirectConverter.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Converters\Unity\RectOffset_DirectConverter.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Converters\Unity\Rect_DirectConverter.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Converters\Unity\UnityEvent_Converter.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Converters\fsArrayConverter.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Converters\fsDateConverter.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Converters\fsDictionaryConverter.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Converters\fsEnumConverter.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Converters\fsForwardConverter.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Converters\fsGuidConverter.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Converters\fsIEnumerableConverter.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Converters\fsKeyValuePairConverter.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Converters\fsNullableConverter.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Converters\fsPrimitiveConverter.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Converters\fsReflectedConverter.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Converters\fsTypeConverter.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Converters\fsWeakReferenceConverter.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Internal\fsCyclicReferenceManager.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Internal\fsOption.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Internal\fsPortableReflection.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Internal\fsTypeExtensions.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Internal\fsVersionManager.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Internal\fsVersionedType.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Reflection\fsMetaProperty.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Reflection\fsMetaType.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Reflection\fsReflectionUtility.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Reflection\fsTypeCache.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\fsBaseConverter.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\fsConfig.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\fsContext.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\fsConverter.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\fsConverterRegistrar.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\fsData.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\fsDirectConverter.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\fsExceptions.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\fsISerializationCallbacks.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\fsIgnoreAttribute.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\fsJsonParser.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\fsJsonPrinter.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\fsMemberSerialization.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\fsObjectAttribute.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\fsObjectProcessor.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\fsPropertyAttribute.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\fsResult.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\fsSerializer.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\JSONSerializer.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Serialization\SerializationUtilites.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\SplineSegment.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\SplineTools.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\StringExtensions.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\TransformExtensions.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\TypeExtensions.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\Vec3MinMax.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\VectorExtensions.cs" />
+     <Compile Include="Assets\Custom Plugins\Common\sBehaviour.cs" />
+     <Compile Include="Assets\Custom Plugins\Lasp\AudioInput.cs" />
+     <Compile Include="Assets\Custom Plugins\Lasp\Internal\FilterBlock.cs" />
+     <Compile Include="Assets\Custom Plugins\Lasp\Internal\LaspStream.cs" />
+     <Compile Include="Assets\Custom Plugins\Lasp\Internal\LaspTerminator.cs" />
+     <Compile Include="Assets\Custom Plugins\Lasp\Internal\PluginEntry.cs" />
+     <Compile Include="Assets\ParticleTests\ParticleSystemTest.cs" />
+     <Compile Include="Assets\Scripts\ColorTemplateManager.cs" />
+     <Compile Include="Assets\Scripts\Listeners\InstantWavelengthListener.cs" />
+     <Compile Include="Assets\Scripts\MusicManager.cs" />
+     <Compile Include="Assets\Scripts\MusicVisualisation.cs" />
+     <Compile Include="Assets\Scripts\MusicVisualisationGUI.cs" />
+     <Compile Include="Assets\Scripts\Mutator.cs" />
+     <Compile Include="Assets\Scripts\MutatorEffectors\Pipe.cs" />
+     <Compile Include="Assets\Scripts\Mutators\FloatRendererShaderVarMutator.cs" />
+     <Compile Include="Assets\Scripts\Mutators\RotationMutator.cs" />
+     <Compile Include="Assets\Scripts\Mutators\ScaleMutator.cs" />
+     <Compile Include="Assets\Scripts\Mutators\ShaderVariableMutator.cs" />
+     <Compile Include="Assets\Scripts\SkyboxColorComponent.cs" />
+     <Compile Include="Assets\Scripts\SmartValue.cs" />
+     <Compile Include="Assets\Scripts\Tiiks\Chaser.cs" />
+     <Compile Include="Assets\Scripts\Tiiks\LineRenderer3D.cs" />
+     <Compile Include="Assets\Scripts\Tiiks\TrailRenderer3D.cs" />
+     <Compile Include="Assets\Scripts\VisComponent.cs" />
+     <Compile Include="Assets\Scripts\VisComponentDrawers.cs" />
+     <Compile Include="Assets\Vine\Leaves\SpawnParticleWIthRotation.cs" />
+     <None Include="Assets\Shaders\Horizontal Skybox.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\FinalPass.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Debug\Waveform.compute" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\Uber.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\Texture3DLerp.compute" />
+     <None Include="Assets\Standard Assets\unity-ui-extensions\Shaders\SoftMaskShader.shader" />
+     <None Include="Assets\Shaders\Explicit Horizontal Skybox.shader" />
+     <None Include="Assets\Standard Assets\unity-ui-extensions\Shaders\UIScreen.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\CopyStd.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\Bloom.shader" />
+     <None Include="Assets\Vine\Shaders\Glitter.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\xRLib.hlsl" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\MultiScaleVOUpsample.compute" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\API\PSSL.hlsl" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\AutoExposure.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Debug\Vectorscope.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\GaussianDownsample.compute" />
+     <None Include="Assets\Standard Assets\unity-ui-extensions\Shaders\UI Particle Premultiply Blend.shader" />
+     <None Include="Assets\Standard Assets\unity-ui-extensions\Shaders\UILinearDodge.shader" />
+     <None Include="Assets\Standard Assets\unity-ui-extensions\Shaders\UI Particle MultiplyDouble.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\ScreenSpaceReflections.hlsl" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\DepthOfField.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\DiscardAlpha.shader" />
+     <None Include="Assets\Standard Assets\NormalDebug.shader" />
+     <None Include="Assets\Standard Assets\unity-ui-extensions\Shaders\UI Particle Multiply.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\Lut3DBaker.compute" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\Dithering.hlsl" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Colors.hlsl" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\API\Vulkan.hlsl" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\GrainBaker.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\ExposureHistogram.hlsl" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Editor\Trackball.shader" />
+     <None Include="Assets\Standard Assets\unity-ui-extensions\Shaders\UI Particle AddSmooth.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Debug\LightMeter.shader" />
+     <None Include="Assets\Standard Assets\unity-ui-extensions\Shaders\UIMultiply.shader" />
+     <None Include="Assets\ParticleTests\SphereShader.shader" />
+     <None Include="Assets\Standard Assets\unity-ui-extensions\Shaders\UIParticleHidden.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\API\D3D12.hlsl" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\API\OpenGL.hlsl" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\DiskKernels.hlsl" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\MultiScaleVODownsample2.compute" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\ScalableAO.hlsl" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\ACES.hlsl" />
+     <None Include="Assets\Standard Assets\unity-ui-extensions\Shaders\UI Particle Blend.shader" />
+     <None Include="Assets\Standard Assets\unity-ui-extensions\Shaders\UI Particle Alpha Blend.shader" />
+     <None Include="Assets\Custom Plugins\Common\Resources\EditorCellShader.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\MultiScaleVODownsample1.compute" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\StdLib.hlsl" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\MultiScaleVO.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\DepthOfField.hlsl" />
+     <None Include="Assets\Standard Assets\unity-ui-extensions\Shaders\UI Particle VertexLit Blended.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\FastApproximateAntialiasing.hlsl" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\Fog.hlsl" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\MultiScaleVORender.compute" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\ScalableAO.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\SubpixelMorphologicalAntialiasing.hlsl" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\MotionBlur.shader" />
+     <None Include="Assets\ParticleTests\CrazyParticles.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\SubpixelMorphologicalAntialiasing.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\Texture2DLerp.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\DeferredFog.shader" />
+     <None Include="Assets\Standard Assets\unity-ui-extensions\Shaders\UI Particle Add.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\API\D3D9.hlsl" />
+     <None Include="Assets\Standard Assets\unity-ui-extensions\Shaders\UIImageCrop.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\Lut2DBaker.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Debug\Overlays.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\API\Metal.hlsl" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Debug\Vectorscope.compute" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\TemporalAntialiasing.shader" />
+     <None Include="Assets\Standard Assets\unity-ui-extensions\Shaders\UISoftAdditive.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\ScreenSpaceReflections.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\Copy.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\API\D3D11.hlsl" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Editor\ConvertToLog.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Debug\Waveform.shader" />
+     <None Include="Assets\Standard Assets\unity-ui-extensions\Shaders\UI Particle AddMultiply.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\API\XboxOne.hlsl" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Sampling.hlsl" />
+     <None Include="Assets\Standard Assets\unity-ui-extensions\Shaders\UIAdditive.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Editor\CurveGrid.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Debug\Histogram.compute" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Debug\Histogram.shader" />
+     <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\ExposureHistogram.compute" />
+ <Reference Include="UnityEngine.UI">
+ <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.TestRunner">
+ <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
+ </Reference>
+ <Reference Include="nunit.framework">
+ <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.HoloLens">
+ <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.VR">
+ <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{2D0B9AF8-5B00-502E-8321-E13AEBD6D61F}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>
