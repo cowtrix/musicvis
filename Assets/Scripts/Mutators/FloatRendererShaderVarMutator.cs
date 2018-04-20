@@ -9,7 +9,7 @@ public class FloatRendererShaderVarMutator : Mutator
 	public string Name;
 	private static MaterialPropertyBlock _block;
 
-	public override void Tick(float strength, float weight)
+	public override void Tick(float strength)
 	{
 		if(_block == null)
 		{

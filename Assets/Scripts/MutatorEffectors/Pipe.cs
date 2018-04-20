@@ -13,7 +13,7 @@ public class PipeMutatorEffect : IMutatorEffector
 
 	float _lastStrength;
 
-	public void Tick(float strength, float weight)
+	public void Tick(float strength)
 	{
 		_lastStrength = strength * Distortion.Evaluate(strength);
 		foreach (var mutator in Mutators)
@@ -22,7 +22,7 @@ public class PipeMutatorEffect : IMutatorEffector
 			{
 				continue;
 			}
-			mutator.Tick(_lastStrength, weight);
+			mutator.Tick(_lastStrength);
 		}
 	}
 
@@ -68,7 +68,7 @@ public class MaxThresholdMutatorEffect : IMutatorEffector
 			{
 				continue;
 			}
-			mutator.Tick(_lastVal, weight);
+			mutator.Tick(_lastVal);
 		}
 	}
 

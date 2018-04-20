@@ -35,7 +35,7 @@ float rand(float2 co){
 void vert (inout appdata_full v, out Input o)
 {
 	UNITY_INITIALIZE_OUTPUT(Input,o);
-	v.vertex.xyz += float3(sin(v.vertex.x * _Distortion1Freq), cos(v.vertex.y * _Distortion1Freq), tan(v.vertex.z * _Distortion1Freq)) * _Distortion1Strength;
+	v.vertex.xyz += float3(sin(v.vertex.x * _Time.x * _Distortion1Freq), cos(v.vertex.y * _Time.x * _Distortion1Freq), tan(v.vertex.z * _Time.x * _Distortion1Freq)) * _Distortion1Strength;
 }
 
 void surf (Input IN, inout SurfaceOutputStandardSpecular o) 

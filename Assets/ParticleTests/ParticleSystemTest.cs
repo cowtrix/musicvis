@@ -16,6 +16,7 @@ public class ParticleSystemTest : Mutator
 	public int BufferSize = 1000;
 	public float ColorFrequency = 1;
 	public bool Exponential;
+	public float AlphaBoost = 1;
 
 	List<float> _buffer = new List<float>();
 
@@ -29,13 +30,12 @@ public class ParticleSystemTest : Mutator
 		{
 			_buffer.RemoveAt(0);
 		}
-
+		float alpha = Mathf.Clamp01(strength) * AlphaBoost;
 		if(Exponential)
 		{
 			strength *= strength;
 		}
-		strength *= ValueMultiplier;
-		
+		strength *= ValueMultiplier;		
 		_buffer.Add(strength);
 
 		if(_particles == null || _particles.Length != System.main.maxParticles)
@@ -63,7 +63,7 @@ public class ParticleSystemTest : Mutator
 			{
 				_particles[i].position = new Vector3(newParticlePos.x, _buffer[index], newParticlePos.y);
 			}
-			_particles[i].startColor = TemplateManager.GetTemplateAtTime(distance * ColorFrequency).Color0;
+			_particles[i].startColor = TemplateManager.GetTemplateAtTime(distance * ColorFrequency).Color0.WithAlpha(alpha);
             
 			rowCounter++;
 			if(rowCounter == Rows)

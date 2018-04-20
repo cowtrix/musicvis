@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class Mutator : MonoBehaviour 
 {
-	public abstract void Tick(float strength, float weight);
+	public abstract void Tick(float strength);
 }

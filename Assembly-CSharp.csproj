@@ -154,6 +154,10 @@
      <Compile Include="Assets\Custom Plugins\Lasp\Internal\LaspStream.cs" />
      <Compile Include="Assets\Custom Plugins\Lasp\Internal\LaspTerminator.cs" />
      <Compile Include="Assets\Custom Plugins\Lasp\Internal\PluginEntry.cs" />
+     <Compile Include="Assets\MidiJack\Midi.cs" />
+     <Compile Include="Assets\MidiJack\MidiDriver.cs" />
+     <Compile Include="Assets\MidiJack\MidiMaster.cs" />
+     <Compile Include="Assets\MidiJack\MidiStateUpdater.cs" />
      <Compile Include="Assets\ParticleTests\ParticleSystemTest.cs" />
      <Compile Include="Assets\Scripts\ColorTemplateManager.cs" />
      <Compile Include="Assets\Scripts\Listeners\InstantWavelengthListener.cs" />

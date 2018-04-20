@@ -11,7 +11,7 @@ public interface IListener
 
 public interface IMutatorEffector
 {
-    void Tick(float strength, float weight);
+    void Tick(float strength);
 }
 
 public class VisComponent
@@ -30,10 +30,10 @@ public class VisComponent
     public void Think(MusicVisualisation musicVisualisation)
     {
         Listener.Listen(musicVisualisation.CurrentState);
-        var strength = Listener.Strength;
+        var strength = Listener.Strength * Weight;
         foreach (var mutator in MutatorEffectors)
         {
-            mutator.Tick(strength, Weight);
+            mutator.Tick(strength);
         }
     }
     

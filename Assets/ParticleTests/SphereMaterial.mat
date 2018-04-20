@@ -60,7 +60,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _Distortion1: 0.5
-    - _Distortion1Freq: 10
+    - _Distortion1Freq: 30
     - _Distortion1Strength: 0
     - _Distortion2: 0
     - _Distortion3: 0

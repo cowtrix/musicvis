@@ -49,6 +49,7 @@
      <Compile Include="Assets\Custom Plugins\Common\Editor\EditorGUIX.cs" />
      <Compile Include="Assets\Custom Plugins\Common\Editor\InSceneScriptableObjectExplorer.cs" />
      <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Aot\Editor\fsAotConfigurationEditor.cs" />
+     <Compile Include="Assets\MidiJack\Editor\MidiJackWindow.cs" />
      <None Include="Assets\Shaders\Horizontal Skybox.shader" />
      <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Builtins\FinalPass.shader" />
      <None Include="Assets\Standard Assets\PostProcessing-2\PostProcessing\Shaders\Debug\Waveform.compute" />
