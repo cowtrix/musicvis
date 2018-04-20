@@ -3,17 +3,54 @@ using System.Collections.Generic;
 using UnityEngine;
 using MadMaps.Common.GenericEditor;
 using System;
+using System.Reflection;
+
+public abstract class BaseMutatorEffect : IMutatorEffector 
+{
+	public class ReflectionEntries
+	{
+		public Component Component;
+		public string FieldName;
+		public FieldInfo FieldInfo;
+	}
+
+	public List<ReflectionEntries> Reflections = new List<ReflectionEntries>();
+
+	public abstract void Tick(float strength);
+
+	protected void ApplyReflection(float val)
+	{
+		for(var i = Reflections.Count - 1; i >= 0; i--)
+		{
+			var reflectionEntry = Reflections[i];
+
+			if(reflectionEntry.FieldInfo != null && reflectionEntry.FieldName != reflectionEntry.FieldInfo.Name)
+			{
+				reflectionEntry.FieldInfo = null;
+			}
+
+			if(reflectionEntry.FieldInfo == null && reflectionEntry.Component != null)
+			{
+				reflectionEntry.FieldInfo = reflectionEntry.Component.GetType().GetField(reflectionEntry.FieldName);
+			}
+			if(reflectionEntry.FieldInfo != null && reflectionEntry.Component != null) 
+			{
+				reflectionEntry.FieldInfo.SetValue(reflectionEntry.Component, val);
+			}
+		}
+	}
+}
 
 [Name("Linear/Pipe")]
 [Serializable]
-public class PipeMutatorEffect : IMutatorEffector 
+public class PipeMutatorEffect : BaseMutatorEffect
 {
 	public AnimationCurve Distortion = AnimationCurve.Linear(0, 1, 1, 1);
 	public List<Mutator> Mutators = new List<Mutator>();
 
 	float _lastStrength;
 
-	public void Tick(float strength)
+	public override void Tick(float strength)
 	{
 		_lastStrength = strength * Distortion.Evaluate(strength);
 		foreach (var mutator in Mutators)
@@ -24,6 +61,7 @@ public class PipeMutatorEffect : IMutatorEffector
 			}
 			mutator.Tick(_lastStrength);
 		}
+		ApplyReflection(_lastStrength);
 	}
 
 	public override string ToString()
@@ -34,7 +72,7 @@ public class PipeMutatorEffect : IMutatorEffector
 
 [Name("Event/Max Threshold")]
 [Serializable]
-public class MaxThresholdMutatorEffect : IMutatorEffector 
+public class MaxThresholdMutatorEffect : BaseMutatorEffect
 {
 	public float TriggerValue = .5f;
 	public float EventDuration = 1;
@@ -45,7 +83,7 @@ public class MaxThresholdMutatorEffect : IMutatorEffector
 	float _playingTimer = 0;
 	float _lastVal;
 
-	public void Tick(float strength)
+	public override void Tick(float strength)
 	{
 		strength = strength * Distortion.Evaluate(strength);
 		if(_playingTimer < 0)
@@ -70,6 +108,7 @@ public class MaxThresholdMutatorEffect : IMutatorEffector
 			}
 			mutator.Tick(_lastVal);
 		}
+		ApplyReflection(_lastVal);
 	}
 
 	public override string ToString()

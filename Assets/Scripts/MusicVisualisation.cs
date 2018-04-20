@@ -3,16 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using MadMaps.Common.Serialization;
 using System;
-using MidiJack;
 
 /// <summary>
 /// Root class for a single music visualisation
 /// </summary>
 public class MusicVisualisation : MonoBehaviour, ISerializationCallbackReceiver
 {
-    public MidiChannel Channel;
-    public int index = 0;
-
     [Range(0, 1)]
     public float Strength = 1;
     public float Time;
@@ -26,7 +22,8 @@ public class MusicVisualisation : MonoBehaviour, ISerializationCallbackReceiver
 
     public void Think(float time, MusicState currentState)
     {
-        Strength = MidiMaster.GetKnob(Channel, index, 1);
+        
+        //Strength = MidiMaster.GetKnob(Channel, index, 1);
 
         Time = time;
         CurrentState = currentState;

@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using System;
 
+[Serializable]
 public class SmartValue
 {
     private Queue<float> _values;

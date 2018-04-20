@@ -19,6 +19,7 @@ public class ParticleSystemTest : Mutator
 	public float AlphaBoost = 1;
 
 	List<float> _buffer = new List<float>();
+	public SmartValue AlphaValue = new SmartValue(1);
 
 	public ColorTemplateManager TemplateManager;
 
@@ -31,6 +32,8 @@ public class ParticleSystemTest : Mutator
 			_buffer.RemoveAt(0);
 		}
 		float alpha = Mathf.Clamp01(strength) * AlphaBoost;
+		AlphaValue.AddValue(alpha);
+		alpha = AlphaValue.Value;
 		if(Exponential)
 		{
 			strength *= strength;
