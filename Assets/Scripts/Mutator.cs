@@ -4,5 +4,22 @@ using UnityEngine;
 
 public abstract class Mutator : MonoBehaviour 
 {
-	public abstract void Tick(float strength);
+	public virtual void Tick(float strength)
+	{
+		/*if(strength <= 0)
+		{
+			if(gameObject.activeSelf)
+			{
+				gameObject.SetActive(false);
+			}
+			return;
+		}
+		if(!gameObject.activeSelf)
+		{
+			gameObject.SetActive(true);
+		}*/
+		TickInternal(strength);
+	}
+
+	protected abstract void TickInternal(float strength);
 }

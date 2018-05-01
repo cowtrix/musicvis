@@ -22,8 +22,18 @@ public class MusicVisualisation : MonoBehaviour, ISerializationCallbackReceiver
 
     public void Think(float time, MusicState currentState)
     {
-        
-        //Strength = MidiMaster.GetKnob(Channel, index, 1);
+        if(Strength <= 0)
+        {
+            if(gameObject.activeSelf)
+            {
+                gameObject.SetActive(false);
+            }
+            return;
+        }
+        if(!gameObject.activeSelf)
+        {
+            gameObject.SetActive(true);
+        }
 
         Time = time;
         CurrentState = currentState;

@@ -6,5 +6,5 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/1.unity
+    path: Assets/Creations/BallLightning/BallLightning.unity
     guid: fe609da06617e3e44b146df3f663807d

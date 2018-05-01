@@ -85,7 +85,7 @@ public class ShaderVariableMutator : Mutator, ISerializationCallbackReceiver
 	public IShaderVariable Variable;
 	[SerializeField] DerivedComponentJsonDataRow VariableJSON;
 
-	public override void Tick(float strength)
+	protected override void TickInternal(float strength)
 	{
 		if(Variable != null)
 		{

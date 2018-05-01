@@ -8,6 +8,7 @@ public class SmartValue
 {
     private Queue<float> _values;
     public int BufferSize = 1;
+    public int SmoothSize = int.MaxValue;
     public bool NormalizeValue;
     public bool SmoothValue;
 
@@ -35,7 +36,33 @@ public class SmartValue
         {
             return _values.First();
         }
-        var currentVal = SmoothValue ? _values.Average() : _values.Last();
+
+        var smoothBufferSize = SmoothSize;
+        if(smoothBufferSize > BufferSize)
+        {
+            smoothBufferSize = BufferSize;
+        }
+
+        var currentVal = 0f;
+        if(SmoothValue)
+        {
+            float sum = 0;
+            int counter = 0;
+            foreach (var f in _values)
+            {
+                sum += f;
+                counter++;
+                if(counter >= smoothBufferSize)
+                {
+                    break;
+                }
+            }            
+            currentVal = sum / (float)counter;
+        }
+        else
+        {
+            currentVal = _values.Last();
+        }
         if(NormalizeValue)
         {
             var min = _values.Min();        

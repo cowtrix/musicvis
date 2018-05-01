@@ -28,11 +28,18 @@ public class ColorTemplateManager : MonoBehaviour
             return Color.cyan;
         }
     }
+
+    public enum ESampleType
+    {
+        RMS,
+        Constant,
+    }
     
     public List<Template> Templates = new List<Template>();
     public float TimePerTemplate = 60;
-
+    public ESampleType SampleType;
     public float Speed = 1;
+    public MusicVisualisation StateSource;
     float _timeAccum;
 
     [ContextMenu("AutoFill Random")]
@@ -44,17 +51,28 @@ public class ColorTemplateManager : MonoBehaviour
             var rootHue = Random.value;
             Templates.Add(new Template()
             {
-                Color0 = Color.HSVToRGB(rootHue, Random.value, Random.value),
-                Color1 = Color.HSVToRGB(Mathfx.Frac(rootHue + (1/3f)), Random.value, Random.value),
-                Color2 = Color.HSVToRGB(Mathfx.Frac(rootHue - (1/3f)), Random.value, Random.value),
+                Color0 = Color.HSVToRGB(rootHue, Random.Range(.8f, 1f), Random.Range(.8f, 1f)),
+                Color1 = Color.HSVToRGB(Mathfx.Frac(rootHue + (1/3f)), Random.Range(.8f, 1f), Random.Range(.8f, 1f)),
+                Color2 = Color.HSVToRGB(Mathfx.Frac(rootHue - (1/3f)), Random.Range(.8f, 1f), Random.Range(.8f, 1f)),
             });
+        }
+    }
+
+    private void Update()
+    {
+        switch(SampleType)
+        {
+            case ESampleType.Constant:
+                _timeAccum += Time.deltaTime * Speed;
+                break;
+            case ESampleType.RMS:
+                _timeAccum += StateSource.CurrentState.RMS * Speed;
+                break;
         }
     }
 
     public Template GetTemplateAtTime(float tOffset = 0)
     {
-        _timeAccum += Time.deltaTime * Speed;
-
         float totalTime = TimePerTemplate * Templates.Count;
         float tFrac = (_timeAccum + tOffset) % totalTime;
 

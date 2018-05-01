@@ -88,3 +88,36 @@ public class ExplicitListener : IListener
 		#endif
 	}      
 }
+
+public class PulseListener : IListener 
+{
+	public float Strength { get; private set; }
+
+	public float BPM;
+	public float Min = 0;
+	public float Max = 180;
+
+	public bool UseMidi;
+	public MidiChannel MidiChannel;
+	public int MidiIndex;
+
+	float _timer;
+
+	public void Listen(MusicState state)
+	{
+		#if UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
+		if(UseMidi)
+		{
+			BPM = Min + MidiMaster.GetKnob(MidiChannel, MidiIndex) * Max;
+		}
+		#endif
+		Strength = 0;
+		_timer += Time.deltaTime;
+		var oneOverBPM = 1f / BPM;
+		while (_timer > oneOverBPM)
+		{
+			_timer -= oneOverBPM;
+			Strength = 1;
+		}
+	}      
+}

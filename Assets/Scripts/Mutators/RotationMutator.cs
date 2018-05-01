@@ -6,8 +6,8 @@ public class RotationMutator : Mutator
 {
 	public Vector3 Axis;
 	
-	public override void Tick(float strength)
+	protected override void TickInternal(float strength)
 	{
-		transform.localRotation *= Quaternion.Euler(Axis);
+		transform.localRotation *= Quaternion.Euler(strength * Axis);
 	}
 }

@@ -7,37 +7,69 @@ using System.Reflection;
 
 public abstract class BaseMutatorEffect : IMutatorEffector 
 {
-	public class ReflectionEntries
+	public class BaseReflectionEntry
 	{
-		public Component Component;
 		public string FieldName;
 		[NonSerialized]
 		public FieldInfo FieldInfo;
+
+		public BaseReflectionEntry Child;
+	}
+
+	public class ReflectionEntries : BaseReflectionEntry
+	{		
+		public Component Component;		
 	}
 
 	public List<ReflectionEntries> Reflections = new List<ReflectionEntries>();
 
 	public abstract void Tick(float strength);
 
-	protected void ApplyReflection(float val)
+	protected void ApplyReflection(float val, bool roundToInt = false)
 	{
 		for(var i = Reflections.Count - 1; i >= 0; i--)
-		{
+		{	
+			
 			var reflectionEntry = Reflections[i];
+			var target = reflectionEntry.Component;
+			
+			ApplyReflectionRecursive(val, reflectionEntry, target,roundToInt);
+			
+		}
+	}
 
-			if(reflectionEntry.FieldInfo != null && reflectionEntry.FieldName != reflectionEntry.FieldInfo.Name)
+	private static void ApplyReflectionRecursive(float val, BaseReflectionEntry reflectionEntry, object target, bool roundToInt)
+	{
+		if(reflectionEntry.FieldInfo != null && reflectionEntry.FieldName != reflectionEntry.FieldInfo.Name)
+		{
+			reflectionEntry.FieldInfo = null;
+		}
+		if(reflectionEntry.FieldInfo == null && target != null)
+		{
+			reflectionEntry.FieldInfo = target.GetType().GetField(reflectionEntry.FieldName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+		}
+		if(reflectionEntry.FieldInfo != null && target != null) 
+		{
+			if(reflectionEntry.Child == null)
 			{
-				reflectionEntry.FieldInfo = null;
+				if(roundToInt)
+				{
+					reflectionEntry.FieldInfo.SetValue(target, Mathf.RoundToInt(val));
+				}
+				else
+				{
+					reflectionEntry.FieldInfo.SetValue(target, val);
+				}				
 			}
-
-			if(reflectionEntry.FieldInfo == null && reflectionEntry.Component != null)
+			else
 			{
-				reflectionEntry.FieldInfo = reflectionEntry.Component.GetType().GetField(reflectionEntry.FieldName);
+				var obj = reflectionEntry.FieldInfo.GetValue(target);
+				ApplyReflectionRecursive(val, reflectionEntry.Child, obj, roundToInt);
 			}
-			if(reflectionEntry.FieldInfo != null && reflectionEntry.Component != null) 
-			{
-				reflectionEntry.FieldInfo.SetValue(reflectionEntry.Component, val);
-			}
+		}
+		else
+		{
+			Debug.LogWarning(string.Format("Failed to find field {0} in {1}", reflectionEntry.FieldName, target));
 		}
 	}
 }
@@ -148,5 +180,46 @@ public class MaxThresholdMutatorEffect : BaseMutatorEffect
 			return "Event Unactivated";
 		}
 		return string.Format("Activated: {0}s = {1}", _playingTimer, _lastVal);
+	}
+}
+
+[Name("Event/Max Threshold Set Random")]
+[Serializable]
+public class MaxThresholdRandomMutatorEffect : BaseMutatorEffect
+{
+	public float TriggerValue = .5f;
+	public float Min = 0;
+	public float Max = 0;
+	public List<Mutator> Mutators = new List<Mutator>();
+	public bool RoundToInt;
+	private float _lastVal;
+
+	public override void Tick(float strength)
+	{
+		if(strength < TriggerValue)
+		{
+			return;
+		}
+		
+		_lastVal = UnityEngine.Random.Range(Min, Max);
+		if(RoundToInt)
+		{
+			_lastVal = Mathf.RoundToInt(_lastVal);
+		}
+		foreach (var mutator in Mutators)
+		{
+			if(mutator == null)
+			{
+				continue;
+			}
+			mutator.Tick(_lastVal);
+		}
+
+		ApplyReflection(_lastVal, RoundToInt);
+	}
+
+	public override string ToString()
+	{
+		return string.Format("Activated: {0}", _lastVal);
 	}
 }
