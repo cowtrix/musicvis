@@ -39,6 +39,7 @@ public class ColorTemplateManager : MonoBehaviour
     public float TimePerTemplate = 60;
     public ESampleType SampleType;
     public float Speed = 1;
+    public bool Exponential;
     public MusicVisualisation StateSource;
     float _timeAccum;
 
@@ -60,15 +61,22 @@ public class ColorTemplateManager : MonoBehaviour
 
     private void Update()
     {
+        float val = 0;
         switch(SampleType)
         {
             case ESampleType.Constant:
-                _timeAccum += Time.deltaTime * Speed;
+                val = Time.deltaTime;                
                 break;
             case ESampleType.RMS:
-                _timeAccum += StateSource.CurrentState.RMS * Speed;
+                val = StateSource.CurrentState.RMS;
                 break;
         }
+        val *= Speed;
+        if(Exponential)
+        {
+            val *= val;
+        }
+        _timeAccum += val;
     }
 
     public Template GetTemplateAtTime(float tOffset = 0)

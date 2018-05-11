@@ -22,10 +22,10 @@ public abstract class BaseMutatorEffect : IMutatorEffector
 	}
 
 	public List<ReflectionEntries> Reflections = new List<ReflectionEntries>();
-
+	public bool RountToInt;
 	public abstract void Tick(float strength);
 
-	protected void ApplyReflection(float val, bool roundToInt = false)
+	protected void ApplyReflection(float val)
 	{
 		for(var i = Reflections.Count - 1; i >= 0; i--)
 		{	
@@ -33,7 +33,7 @@ public abstract class BaseMutatorEffect : IMutatorEffector
 			var reflectionEntry = Reflections[i];
 			var target = reflectionEntry.Component;
 			
-			ApplyReflectionRecursive(val, reflectionEntry, target,roundToInt);
+			ApplyReflectionRecursive(val, reflectionEntry, target, RountToInt);
 			
 		}
 	}
@@ -191,7 +191,6 @@ public class MaxThresholdRandomMutatorEffect : BaseMutatorEffect
 	public float Min = 0;
 	public float Max = 0;
 	public List<Mutator> Mutators = new List<Mutator>();
-	public bool RoundToInt;
 	private float _lastVal;
 
 	public override void Tick(float strength)
@@ -202,10 +201,6 @@ public class MaxThresholdRandomMutatorEffect : BaseMutatorEffect
 		}
 		
 		_lastVal = UnityEngine.Random.Range(Min, Max);
-		if(RoundToInt)
-		{
-			_lastVal = Mathf.RoundToInt(_lastVal);
-		}
 		foreach (var mutator in Mutators)
 		{
 			if(mutator == null)
@@ -215,7 +210,7 @@ public class MaxThresholdRandomMutatorEffect : BaseMutatorEffect
 			mutator.Tick(_lastVal);
 		}
 
-		ApplyReflection(_lastVal, RoundToInt);
+		ApplyReflection(_lastVal);
 	}
 
 	public override string ToString()

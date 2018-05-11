@@ -2,6 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MadMaps.Common;
+using System;
+
+[Serializable]
+public class ColorMutator
+{
+	public float Hue, Sat, Val;
+
+	public Color Mutate(Color c)
+	{
+		float h, s, v;
+		Color.RGBToHSV(c, out h, out s, out v);
+		h = Mathfx.Frac(h + Hue);
+		s = Mathf.Clamp01(s + Sat);
+		v = Mathf.Clamp01(v + Val);
+		return Color.HSVToRGB(h, s, v).WithAlpha(c.a);
+	}
+}
 
 public class ColorTemplateShaderFeeder : MonoBehaviour 
 {
@@ -16,6 +33,8 @@ public class ColorTemplateShaderFeeder : MonoBehaviour
 	public Color LastColor;
 	private static MaterialPropertyBlock _block;
 
+	public ColorMutator Mutator;
+	
 	private void Update()
 	{
 		if(_block == null)
@@ -23,7 +42,8 @@ public class ColorTemplateShaderFeeder : MonoBehaviour
 			_block = new MaterialPropertyBlock();
 		}
 		Renderer.GetPropertyBlock(_block);
-		LastColor = Manager.GetTemplateAtTime(Offset).GetByIndex(Index).WithAlpha(Alpha);
+		LastColor = Mutator.Mutate(Manager.GetTemplateAtTime(Offset).GetByIndex(Index).WithAlpha(Alpha));
+		
 		_block.SetColor(Name, LastColor);
 		Renderer.SetPropertyBlock(_block); 
 	}
