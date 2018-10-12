@@ -84,7 +84,9 @@
      <Compile Include="Assets\PostProcessing\Editor\Utils\EditorResources.cs" />
      <Compile Include="Assets\PostProcessing\Editor\Utils\FxStyles.cs" />
      <Compile Include="Assets\PostProcessing\Editor\Utils\ReflectionUtils.cs" />
-     <Compile Include="Assets\Scripts\Editor\ImageStitcher.cs" />
+     <Compile Include="Assets\Scripts\Editor\ListenerGUI.cs" />
+     <Compile Include="Assets\Scripts\Editor\MusicVisualisationGUI.cs" />
+     <Compile Include="Assets\Scripts\Editor\MutatorEffectGUI.cs" />
      <Compile Include="Assets\TSF\Editor\TSF.cs" />
      <None Include="Assets\Shaders\Horizontal Skybox.shader" />
      <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.shader" />
@@ -131,6 +133,7 @@
      <None Include="Assets\Standard Assets\unity-ui-extensions\Shaders\UI Particle VertexLit Blended.shader" />
      <None Include="Assets\PostProcessing\Resources\Bluenoise64\COPYING.txt" />
      <None Include="Assets\PostProcessing\Editor Resources\UI\Trackball.shader" />
+     <None Include="Assets\Creations\Wobbleball\WobbleBall.shader" />
      <None Include="Assets\TSF\Shaders\TSF.shader" />
      <None Include="Assets\Creations\BallLightning\CrazyParticles.shader" />
      <None Include="Assets\PostProcessing\Resources\Shaders\Bloom.cginc" />

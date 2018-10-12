@@ -5,6 +5,7 @@ using UnityEngine;
 public class SkyboxColorComponent : MonoBehaviour
 {
     public ColorTemplateManager TemplateManager;
+    [Range(0, 2)]
     public int ColorIndex1, ColorIndex2, ColorIndex3;
     public ColorMutator ColorMutator1, ColorMutator2, ColorMutator3;
 

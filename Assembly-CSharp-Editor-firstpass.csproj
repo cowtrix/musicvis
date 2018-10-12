@@ -108,6 +108,7 @@
      <None Include="Assets\Standard Assets\unity-ui-extensions\Shaders\UI Particle VertexLit Blended.shader" />
      <None Include="Assets\PostProcessing\Resources\Bluenoise64\COPYING.txt" />
      <None Include="Assets\PostProcessing\Editor Resources\UI\Trackball.shader" />
+     <None Include="Assets\Creations\Wobbleball\WobbleBall.shader" />
      <None Include="Assets\TSF\Shaders\TSF.shader" />
      <None Include="Assets\Creations\BallLightning\CrazyParticles.shader" />
      <None Include="Assets\PostProcessing\Resources\Shaders\Bloom.cginc" />

@@ -5,6 +5,21 @@ using UnityEngine;
 public class RotationMutator : Mutator 
 {
 	public Vector3 Axis;
+	public bool RandomiseOnStart;
+
+	[ContextMenu("Randomise")]
+	void Randomise()
+	{
+		Axis = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * Axis.magnitude;
+	}
+
+	private void Start()
+	{
+		if(RandomiseOnStart)
+		{
+			Randomise();
+		}
+	}
 	
 	protected override void TickInternal(float strength)
 	{

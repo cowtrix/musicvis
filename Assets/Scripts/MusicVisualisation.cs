@@ -7,81 +7,23 @@ using System;
 /// <summary>
 /// Root class for a single music visualisation
 /// </summary>
-public class MusicVisualisation : MonoBehaviour, ISerializationCallbackReceiver
+public class MusicVisualisation : MonoBehaviour
 {
     [Range(0, 1)]
     public float Strength = 1;
-    public float Time;
-    [HideInInspector]
-    public MusicState CurrentState = new MusicState();    
-    public ColorTemplateManager ColorTemplateManager;
 
-    public List<VisComponent> Components = new List<VisComponent>();
-    [HideInInspector]
-    public List<DerivedComponentJsonDataRow> ComponentsJSON = new List<DerivedComponentJsonDataRow>();
+    List<Transition> _transitions = new List<Transition>();
 
-    public void Think(float time, MusicState currentState)
+    private void Awake()
     {
-        if(Strength <= 0)
-        {
-            if(gameObject.activeSelf)
-            {
-                gameObject.SetActive(false);
-            }
-            return;
-        }
-        if(!gameObject.activeSelf)
-        {
-            gameObject.SetActive(true);
-        }
-
-        Time = time;
-        CurrentState = currentState;
-
-        for (var i = 0; i < Components.Count; i++)
-        {
-            var musicVisualisation = Components[i];
-            if (musicVisualisation == null)
-            {
-                Components.RemoveAt(i);
-                i--;
-                continue;
-            }
-            musicVisualisation.Think(this);
-        }
+        _transitions.AddRange(GetComponentsInChildren<Transition>());
     }
 
-    public void OnBeforeSerialize()
+    private void Update()
     {
-        ComponentsJSON.Clear();
-        foreach(var component in Components)
+        foreach(var transition in _transitions)
         {
-            if(component == null)
-            {
-                ComponentsJSON.Add(null);
-                continue;
-            }
-            var newRow = new DerivedComponentJsonDataRow();
-            newRow.AssemblyQualifiedName = component.GetType().AssemblyQualifiedName;
-            newRow.SerializedObjects = new List<UnityEngine.Object>();  
-            newRow.JsonText = JSONSerializer.Serialize(component.GetType(), component, false, newRow.SerializedObjects);
-            ComponentsJSON.Add(newRow);
+            transition.Tick(Strength);
         }
     }
-
-    public void OnAfterDeserialize()
-    {
-        Components.Clear();
-        foreach(var row in ComponentsJSON)
-        {
-            if(row == null)
-            {
-                Components.Add(null);
-                continue;
-            }
-            var newObj = JSONSerializer.Deserialize(Type.GetType(row.AssemblyQualifiedName), row.JsonText, row.SerializedObjects) as VisComponent;
-            Components.Add(newObj);
-        }         
-    }
-
 }

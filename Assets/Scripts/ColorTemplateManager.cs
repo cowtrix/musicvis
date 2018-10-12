@@ -29,19 +29,12 @@ public class ColorTemplateManager : MonoBehaviour
         }
     }
 
-    public enum ESampleType
-    {
-        RMS,
-        Constant,
-    }
-    
     public List<Template> Templates = new List<Template>();
     public float TimePerTemplate = 60;
-    public ESampleType SampleType;
     public float Speed = 1;
     public bool Exponential;
     public MusicVisualisation StateSource;
-    float _timeAccum;
+    public float Time;
 
     [ContextMenu("AutoFill Random")]
     public void AutoFillRandom()
@@ -52,37 +45,22 @@ public class ColorTemplateManager : MonoBehaviour
             var rootHue = Random.value;
             Templates.Add(new Template()
             {
-                Color0 = Color.HSVToRGB(rootHue, Random.Range(.8f, 1f), Random.Range(.8f, 1f)),
-                Color1 = Color.HSVToRGB(Mathfx.Frac(rootHue + (1/3f)), Random.Range(.8f, 1f), Random.Range(.8f, 1f)),
-                Color2 = Color.HSVToRGB(Mathfx.Frac(rootHue - (1/3f)), Random.Range(.8f, 1f), Random.Range(.8f, 1f)),
+                Color0 = Color.HSVToRGB(rootHue, Random.Range(.7f, 1f), Random.Range(.9f, 1f)),
+                Color1 = Color.HSVToRGB(Mathfx.Frac(rootHue + Random.Range(1/6f, 1/4f)), Random.Range(.7f, 1f), Random.Range(.9f, 1f)),
+                Color2 = Color.HSVToRGB(Mathfx.Frac(rootHue - Random.Range(1/6f, 1/4f)), Random.Range(.7f, 1f), Random.Range(.7f, 1f)),
             });
         }
     }
 
-    private void Update()
+    public void AddToTime(float value)
     {
-        float val = 0;
-        switch(SampleType)
-        {
-            case ESampleType.Constant:
-                val = Time.deltaTime;                
-                break;
-            case ESampleType.RMS:
-                val = StateSource.CurrentState.RMS;
-                break;
-        }
-        val *= Speed;
-        if(Exponential)
-        {
-            val *= val;
-        }
-        _timeAccum += val;
+        Time += value;
     }
 
     public Template GetTemplateAtTime(float tOffset = 0)
     {
         float totalTime = TimePerTemplate * Templates.Count;
-        float tFrac = (_timeAccum + tOffset) % totalTime;
+        float tFrac = (Time + tOffset) % totalTime;
 
         float tIndex = (tFrac / totalTime) * (Templates.Count - 1);
         int tBase = Mathf.FloorToInt(tIndex);

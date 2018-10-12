@@ -81,6 +81,7 @@ namespace MadMaps.Common.GenericEditor
             {
                 _activeDrawers = new Dictionary<Type, IGenericDrawer>();
                 var allTypes = typeof(IGenericDrawer).GetAllTypesImplementingInterface();
+                allTypes.AddRange(typeof(IGenericDrawer).GetAllTypesImplementingInterface(typeof(EditorApplication)));
                 foreach(var t in allTypes)
                 {
                     if (t.IsAbstract)

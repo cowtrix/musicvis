@@ -2,18 +2,7 @@
 using System.Collections.Generic;
 using MadMaps.Common.Serialization;
 using System;
-
-public interface IListener
-{
-    void Listen(MusicState state);
-    float Strength { get; }
-}
-
-public interface IMutatorEffector
-{
-    void Tick(float strength);
-}
-
+/* 
 public class VisComponent
 {
     public String Name = "New Component";
@@ -45,4 +34,4 @@ public class VisComponent
         }
         return string.Format("{2} : {0} : {1}", Listener.Strength, Listener.ToString(), Name);
     }
-}
+}*/

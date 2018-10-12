@@ -25,6 +25,7 @@ public class GUIManager : MonoBehaviour
 
 	private void Awake()
 	{
+		/*
 		_canvasGroup = GetComponent<CanvasGroup>();
 
 		_visualisations.Clear();
@@ -38,12 +39,6 @@ public class GUIManager : MonoBehaviour
 			newUI.Header = Instantiate(Header);
 			newUI.Header.text = visualisation.name;
 			newUI.Header.transform.SetParent(Container);
-
-			/*newUI.Weight = Instantiate(Slider);
-			newUI.Weight.transform.SetParent(Container);
-			newUI.Weight.GetComponentInChildren<Text>().text = "Weight";
-			newUI.Weight.value = visualisation.Strength;
-			newUI.Weight.onValueChanged.AddListener((f) => visualisation.Strength = f);*/
 			
 			for(var i = 0; i < visualisation.Components.Count; ++i)
 			{
@@ -68,7 +63,7 @@ public class GUIManager : MonoBehaviour
 				newUI.Listeners.Add(newSlider, explicitListener);
 			}
 			_uis.Add(newUI);
-		}
+		}*/
 	}
 
 	private void Update()
