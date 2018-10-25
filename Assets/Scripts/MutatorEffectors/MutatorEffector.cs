@@ -23,6 +23,11 @@ public abstract class MutatorEffector : MonoBehaviour
 
     private void Update()
     {
+        if(Listener == null)
+        {
+            Listener = GetComponent<Listener>();
+            return;
+        }
         if(Listener.CurrentListener != null)
         {
             Tick(Listener.CurrentListener.Strength);

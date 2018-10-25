@@ -1,10 +1,13 @@
-﻿Shader "Custom/WobbleBall" {
+﻿// Upgrade NOTE: upgraded instancing buffer 'Props' to new syntax.
+
+Shader "Custom/WobbleBall" {
 	Properties {
 		_Color ("Color", Color) = (1,1,1,1)
 		_MainTex ("Albedo (RGB)", 2D) = "white" {}
 		_Glossiness ("Smoothness", Range(0,1)) = 0.5
 		_Metallic ("Metallic", Range(0,1)) = 0.0
 		[Bump] _Bump ("Normal Map", 2D) = "bump" {}
+		_OffsetMinMax("Offset Min/Max", Vector) = (1, 4, 0, 0)
 	}
 	SubShader {
 		Tags { "RenderType"="Opaque" }
@@ -30,18 +33,23 @@
 		fixed4 _Color;
 		sampler2D _Wavelength;
 		sampler2D _Bump;
+		sampler2D _Delta;
+		fixed4 _OffsetMinMax;
 
 		// Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
 		// See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
 		// #pragma instancing_options assumeuniformscaling
-		UNITY_INSTANCING_CBUFFER_START(Props)
+		UNITY_INSTANCING_BUFFER_START(Props)
 			// put more per-instance properties here
-		UNITY_INSTANCING_CBUFFER_END
+		UNITY_INSTANCING_BUFFER_END(Props)
 
 		void vert (inout appdata_full v, out Input o)
 		{
 			UNITY_INITIALIZE_OUTPUT(Input,o);
-			//v.vertex.x += tex2Dlod (_Wavelength, float4(o.uv_MainTex.x, o.uv_MainTex.y, 1, 1)) * sign(v.vertex.x);
+			float4 tex = tex2Dlod (_Delta, float4(v.texcoord.xy, 0, 0));
+			tex *= tex * tex * tex;
+			tex /= _OffsetMinMax.y;			
+			v.vertex.xyz *= _OffsetMinMax.x + tex.xyz;
 		}
 
 		void surf (Input IN, inout SurfaceOutputStandardSpecular o) {

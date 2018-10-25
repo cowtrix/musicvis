@@ -11,6 +11,11 @@ public class SkyboxColorComponent : MonoBehaviour
 
     void Update()
     {
+        if(!TemplateManager)
+        {
+            Debug.LogWarning("No TemplateManager for " + this, this);
+            return;
+        }
         var template = TemplateManager.GetTemplateAtTime();
         RenderSettings.ambientGroundColor = ColorMutator1.Mutate(template.GetByIndex(ColorIndex1));
         RenderSettings.ambientEquatorColor = ColorMutator2.Mutate(template.GetByIndex(ColorIndex2));
