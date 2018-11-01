@@ -37,7 +37,7 @@ public class ParticleSystemTest : Mutator
 		}
 		float alpha = Mathf.Clamp01(strength) * AlphaBoost;
 		AlphaValue.AddValue(alpha);
-		alpha = AlphaValue.Value;
+		alpha = AlphaValue.GetValue();
 		if(Exponential)
 		{
 			strength *= strength;

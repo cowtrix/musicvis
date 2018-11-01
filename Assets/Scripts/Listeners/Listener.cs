@@ -3,19 +3,84 @@ using System.Collections.Generic;
 using UnityEngine;
 using MadMaps.Common.Serialization;
 using System;
+using MidiJack;
 
 public class Listener : MonoBehaviour, ISerializationCallbackReceiver
 {
-	public IListener CurrentListener;
+	public const int MIN_BUFFER = 1;
+	public const int MAX_BUFFER = 2000;
+
+	[SerializeField]
+	private IListener CurrentListener;
+	public SmartValue Value;
+	
+
 	[SerializeField][HideInInspector]
 	private DerivedComponentJsonDataRow ListenerJSON;
 
-	private void Update()
+	public bool UseMidi;
+	public MidiChannel MidiChannel;
+	public int MidiIndex;
+
+    public float Strength 
+	{ 
+		get
+		{
+			if(CurrentListener != null)
+			{
+				return Value.GetValue();
+			}
+			return 1;
+		}
+	}
+
+	void OnDrawGizmos()
 	{
+		Value.BufferSize = Mathf.Clamp(Value.BufferSize, MIN_BUFFER, MAX_BUFFER);
+		Value.Smooth = Mathf.Clamp01(Value.Smooth);		
+	}
+
+	void TryRegister()
+	{
+		if(GUIManager.HasInstance())
+		{
+			GUIManager.Instance.RegisterListener(this);
+		}
+		if(MusicManager.HasInstance())
+		{
+			MusicManager.Instance.RegisterListener(this);
+		}
+	}
+
+	void Update()
+	{
+		TryRegister();
+		Value.Tick(Time.deltaTime);
+	}
+
+    public void Tick()
+	{	
+			
 		if(CurrentListener != null)
 		{
-			CurrentListener.Listen();
+			CurrentListener.Listen(Value);
 		}
+		#if UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN    // MIDI don't work with Linux :(
+		if(UseMidi)
+		{
+			Value.Multiplier = MidiMaster.GetKnob(MidiChannel, MidiIndex);
+		}
+		#endif
+	}
+
+	void Awake()
+	{
+		TryRegister();
+	}
+
+	void OnEnable()
+	{
+		TryRegister();
 	}
 
 	public void OnBeforeSerialize()

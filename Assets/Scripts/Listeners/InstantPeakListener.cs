@@ -6,11 +6,8 @@ using MidiJack;
 
 public class InstantPeakListener : IListener 
 {
-	public float Strength { get { return Value.Value; } }
-	public SmartValue Value = new SmartValue(1);
-
-	public void Listen()
+	public void Listen(SmartValue value)
 	{
-		Value.AddValue(MusicManager.MusicState.Peak);
+		value.AddValue(MusicManager.MusicState.Peak);
 	}      
 }

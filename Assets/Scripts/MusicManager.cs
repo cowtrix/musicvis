@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MusicState
 {
@@ -18,12 +19,21 @@ public class MusicManager : Singleton<MusicManager>
     public Texture2D WavelengthTexture;
     public Texture2D DeltaTexture;
 
+    public List<Scene> Scenes = new List<Scene>();
+    List<Listener> _listeners = new List<Listener>();
+ 
     SmartValue _min, _max;
 
     private void Awake()
     {
         _min = new SmartValue(1000);
         _max = new SmartValue(1000);
+
+        DontDestroyOnLoad(gameObject);
+        foreach(var scene in Scenes)
+        {
+            SceneManager.LoadSceneAsync(scene.name, LoadSceneMode.Additive);
+        }
     } 
 
     private void Update()
@@ -69,5 +79,29 @@ public class MusicManager : Singleton<MusicManager>
         DeltaTexture.Apply();
         Shader.SetGlobalTexture("_Wavelength", WavelengthTexture);
         Shader.SetGlobalTexture("_Delta", WavelengthTexture);
+
+        foreach(var listener in _listeners)
+        {
+            listener.Tick();
+        }
+    }
+
+    public void RegisterListener(Listener listener)
+    {
+        if(_listeners.Contains(listener))
+        {
+            return;
+        }
+        _listeners.Add(listener);
+    }
+
+    public void Reload()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void Auto()
+    {
+        Debug.Log("Ya gotta code this, dummy!");
     }
 }

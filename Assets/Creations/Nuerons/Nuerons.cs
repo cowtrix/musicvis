@@ -69,23 +69,21 @@ public class Nuerons : MonoBehaviour
 
 	Vector3 GetPhase(int number)
 	{
-		var lower = Mathf.FloorToInt(_phase);
-		var upper = Mathf.CeilToInt(_phase);
+		var phase = _phase;
+		if(number == 0)
+		{
+			//phase =  Phases.Count -_phase;
+		}
+		var lower = Mathf.FloorToInt(phase);
+		var upper = Mathf.CeilToInt(phase);
 		if(upper == Phases.Count)
 		{
 			upper = 0;
 		}
-		var f = Mathfx.Frac(_phase);
+		var f = Mathfx.Frac(phase);
 		var lowerPhase = Phases[lower];
 		var upperPhase = Phases[upper];
-		if(number == 0)
-		{
-			return Vector3.Lerp(lowerPhase.Phase1, upperPhase.Phase1, f);
-		}
-		else
-		{
-			return Vector3.Lerp(lowerPhase.Phase2, upperPhase.Phase2, f);
-		}
+		return Vector3.Lerp(lowerPhase.Phase1, upperPhase.Phase1, f);
 	}
 
 	void Update()
@@ -108,7 +106,6 @@ public class Nuerons : MonoBehaviour
 			var t = _thoughts[i];
 			if(Vector3.Distance(t.Destination, t.Transform.localPosition) < .1f)
 			{
-				Debug.Log("New");
 				Random.InitState(Time.frameCount + i);
 				t.Destination = new Vector3(Random.Range(-CellRadius, CellRadius) * GridSize,
 					Random.Range(-CellRadius, CellRadius) * GridSize,

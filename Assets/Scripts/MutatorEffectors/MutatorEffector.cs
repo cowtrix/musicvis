@@ -28,10 +28,7 @@ public abstract class MutatorEffector : MonoBehaviour
             Listener = GetComponent<Listener>();
             return;
         }
-        if(Listener.CurrentListener != null)
-        {
-            Tick(Listener.CurrentListener.Strength);
-        }
+        Tick(Listener.Strength);
         if(Event != null)
         {
             Event.Invoke(Value);

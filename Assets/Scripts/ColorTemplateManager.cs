@@ -33,7 +33,6 @@ public class ColorTemplateManager : MonoBehaviour
     public float TimePerTemplate = 60;
     public float Speed = 1;
     public bool Exponential;
-    public MusicVisualisation StateSource;
     public float Time;
 
     [ContextMenu("AutoFill Random")]

@@ -7,6 +7,14 @@ using UnityEngine;
 
 public static class GameObjectExtensions
 {
+    public static void SetChildrenActive(this GameObject gameObject, bool value)
+    {
+        foreach(Transform child in gameObject.transform)
+        {
+            child.gameObject.SetActive(value);
+        }
+    }
+
     public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
     {
         T component = gameObject.GetComponent<T>();
@@ -120,6 +128,29 @@ public static class GameObjectExtensions
         }
 
         return GetComponentByInterfaceInAncestors<T>(component.transform.parent);
+    }
+
+    public static List<T> GetComponentsInAncestors<T>(this Transform component, List<T> list = null) where T : Component
+    {
+        if(list == null)
+        {
+            list = new List<T>();
+        }
+        if(component != null)
+        {
+            var result = component.GetComponent<T>();
+            if (result != null)
+            {
+                list.Add(result);
+            }
+
+            if (component.parent == null)
+            {
+                return list;
+            }  
+            return GetComponentsInAncestors<T>(component.parent, list);
+        }
+        return list;
     }
 
     public static T GetComponentInAncestors<T>(this Transform component) where T : Component

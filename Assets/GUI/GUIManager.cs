@@ -2,88 +2,108 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
+using MadMaps.Common;
 
-public class GUIManager : MonoBehaviour 
+public class GUIManager : Singleton<GUIManager> 
 {
-	public Text Header;
-	public Slider Slider;
+	public ListenerDisplay DisplayPrefab;
+	public RectTransform DisplayContainer;
+	public ListenerToggle TogglePrefab;
+	public RectTransform ToggleContainer;
 
-	public RectTransform Container;
+	List<Listener> _listeners = new List<Listener>();
+	List<ListenerToggle> _toggles = new List<ListenerToggle>();
+	List<ListenerDisplay> _activeDisplays = new List<ListenerDisplay>();
+	Queue<ListenerDisplay> _inactiveDisplays = new Queue<ListenerDisplay>();
+	bool _toggleListDirty;
 
-	List<MusicVisualisation> _visualisations = new List<MusicVisualisation>();
-	List<VisUI> _uis = new List<VisUI>();
-	bool _uiToggled = true;
-	CanvasGroup _canvasGroup;
-
-	private class VisUI
+	public void RegisterListener(Listener listener)
 	{
-		public Text Header;
-		//public Slider Weight;
-		public Dictionary<Slider, ExplicitListener> Listeners = new Dictionary<Slider, ExplicitListener>();
-		public MusicVisualisation Visualisation;
-	}
-
-	private void Awake()
-	{
-		/*
-		_canvasGroup = GetComponent<CanvasGroup>();
-
-		_visualisations.Clear();
-		_visualisations.AddRange(FindObjectsOfType<MusicVisualisation>());
-
-		foreach (var visualisation in _visualisations)
+		if(_listeners.Contains(listener))
 		{
-			var newUI = new VisUI();
-			newUI.Visualisation = visualisation;
-
-			newUI.Header = Instantiate(Header);
-			newUI.Header.text = visualisation.name;
-			newUI.Header.transform.SetParent(Container);
-			
-			for(var i = 0; i < visualisation.Components.Count; ++i)
-			{
-				var component = visualisation.Components[i];
-				var explicitListener = component.Listener as ExplicitListener;
-				if(explicitListener == null)
-				{
-					continue;
-				}
-				var newSlider = Instantiate(Slider);
-				newSlider.transform.SetParent(Container);				
-				newSlider.GetComponentInChildren<Text>().text = component.Name;
-				newSlider.value = explicitListener.Value;
-				newSlider.onValueChanged.AddListener((f) => 
-					{
-						if(explicitListener != null)
-						{
-							explicitListener.Value = f;
-						}
-					}
-				);
-				newUI.Listeners.Add(newSlider, explicitListener);
-			}
-			_uis.Add(newUI);
-		}*/
-	}
-
-	private void Update()
-	{
-		if(Input.GetKeyUp(KeyCode.Tab))
-		{
-			_uiToggled = !_uiToggled;
+			return;
 		}
-		_canvasGroup.alpha = _uiToggled ? 1 : 0;
+		_listeners.Add(listener);
+		_toggleListDirty = true;
 	}
 
-	private void LateUpdate()
+	void Update()
 	{
-		foreach(var ui in _uis)
+		if(_toggleListDirty)
 		{
-			//ui.Visualisation.Strength = ui.Weight.value;
-			foreach(var slider in ui.Listeners)
+			RefreshToggles();
+		}
+	}
+
+	void RefreshToggles()
+	{
+		_toggleListDirty = false;
+		_listeners = _listeners.OrderByDescending((x) => x.transform.GetHierarchyIndex()).ToList();
+		for(var i = 0; i < _listeners.Count; ++i)
+		{
+			var listener = _listeners[i];
+			if(i <= _toggles.Count)
 			{
-				slider.Value.Value = slider.Key.value;
+				var newToggle = Instantiate(TogglePrefab.gameObject).GetComponent<ListenerToggle>();
+				newToggle.transform.SetParent(ToggleContainer);
+				_toggles.Add(newToggle);
+			}
+			var t = _toggles[i];
+			t.gameObject.SetActive(true);
+			t.SetTarget(listener);			
+		}
+		for(var i = _listeners.Count; i < _toggles.Count; ++i)
+		{
+			_toggles[i].gameObject.SetActive(false);
+		}
+	}
+
+	public void SetActive(Listener l, bool val)
+	{
+		ListenerDisplay current = null;
+		foreach(var disp in _activeDisplays)
+		{
+			if(disp.Target == l)
+			{
+				current = disp;
+				break;
 			}
 		}
+		if((current && val) || (!current && !val))
+		{
+			// Nothing to do here
+			return;
+		}
+		
+		if(!val)
+		{
+			current.gameObject.SetActive(false);
+			_activeDisplays.Remove(current);
+			_inactiveDisplays.Enqueue(current);
+			var tog = _toggles.First((x) => x.Target == l);
+			if(tog)
+			{
+				tog.Toggle.isOn = false;
+			}
+			return;
+		}
+		else
+		{
+			ListenerDisplay display = null;
+			if(_inactiveDisplays.Count == 0)
+			{
+				display = Instantiate(DisplayPrefab.gameObject).GetComponent<ListenerDisplay>();
+				display.transform.SetParent(DisplayContainer);
+			}
+			else
+			{
+				display = _inactiveDisplays.Dequeue();
+			}
+			_activeDisplays.Add(display);
+			display.gameObject.SetActive(true);
+			display.SetTarget(l);
+		}
+		
 	}
 }

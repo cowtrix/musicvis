@@ -6,25 +6,45 @@ using System;
 [Serializable]
 public class SmartValue
 {
-    private Queue<float> _values;
-    public int BufferSize = 1;
-    public int SmoothSize = int.MaxValue;
-    public bool NormalizeValue;
-    public bool SmoothValue;
+    struct Frame{
+        public float Value;
+        public float Multiplier;
 
-    public float Value 
-    {
-        get
+        public Frame(float val, float multiplier)
         {
-            return GetValue();
+            Value = val;
+            Multiplier = multiplier;
+        }
+
+        public float MultipliedValue
+        {
+            get{
+                return Value * Multiplier;
+            }
         }
     }
+
+    Frame _actual;
+    Frame _target;
+    private Queue<Frame> _values;
+    public int BufferSize = 1000;
+    public float Smooth = 0;
+    public bool NormalizeValue = true;
+	[Range(0, 1)]
+    public float Multiplier = 1;
 
     public SmartValue(int bufferSize)
     {
         BufferSize = bufferSize;
-        _values = new Queue<float>(BufferSize);
-    }    
+        _values = new Queue<Frame>(BufferSize);
+    }
+
+    public void Tick(float dt)
+    {
+        var smoothFactor = (1-Smooth) * (1-Smooth);
+        _actual.Multiplier = Mathf.MoveTowards(_actual.Multiplier, _target.Multiplier, smoothFactor * dt);
+        _actual.Value = Mathf.MoveTowards(_actual.Value, _target.Value, smoothFactor * dt);
+    }
 
     public float GetValue()
     {
@@ -32,48 +52,42 @@ public class SmartValue
         {
             return 0;
         }
+        var currentVal = _values.Last();
+        _target = currentVal;
         if(_values.Count == 1)
         {
-            return _values.First();
-        }
-
-        var smoothBufferSize = SmoothSize;
-        if(smoothBufferSize > BufferSize)
-        {
-            smoothBufferSize = BufferSize;
-        }
-
-        var currentVal = 0f;
-        if(SmoothValue)
-        {
-            float sum = 0;
-            int counter = 0;
-            foreach (var f in _values)
+            if(Smooth > 0)
             {
-                sum += f;
-                counter++;
-                if(counter >= smoothBufferSize)
-                {
-                    break;
-                }
-            }            
-            currentVal = sum / (float)counter;
-        }
-        else
-        {
-            currentVal = _values.Last();
-        }
+                return _actual.MultipliedValue;
+            }
+            return currentVal.MultipliedValue;
+        }        
+            
         if(NormalizeValue)
         {
-            var min = _values.Min();        
-            return (currentVal - min) / Mathf.Max(float.Epsilon, (_values.Max() - min));
+            const float threshold = .0001f;
+            var min = _values.Min((x) => x.Value);
+            var max = _values.Max((x) => x.Value);
+            if(max - min > threshold)
+            {
+                _target.Value = (currentVal.Value - min) / (max - min);
+            }
         }
-        return currentVal;
+        
+        if(Smooth > 0)
+        {
+            return _actual.MultipliedValue;
+        }
+        return _target.MultipliedValue;
     }
 
     public void AddValue(float val)
     {
-        _values.Enqueue(val);
+        if(_values == null)
+        {
+            _values = new Queue<Frame>(BufferSize);
+        }
+        _values.Enqueue(new Frame(val, Multiplier));
         while (_values.Count > BufferSize)
         {
             _values.Dequeue();

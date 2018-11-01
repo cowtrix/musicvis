@@ -36,6 +36,8 @@ public class WaveDisks : MonoBehaviour {
 			var trs = Matrix4x4.TRS(transform.position, r, s);
 			_block.SetFloat("_U", i / (float)w.Length);
 			_block.SetFloat("_Strength", f);
+			Random.InitState(i);
+			_block.SetColor("_Color", Random.ColorHSV(0, 1, 0.8f, 1f, 0.8f, 1f));
 			Graphics.DrawMesh(Mesh, trs, Material, 0, null, 0, _block);
 		}
 	}

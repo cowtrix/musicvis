@@ -1,9 +1,58 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManager;
 
 namespace MadMaps.Common
 {
     public static class TransformExtensions
     {
+
+        
+        public static float GetHierarchyIndex(this Transform transform)
+        {
+            int index = 0;
+            MarchUpHierarchyForIndex(transform, ref index);
+            transform.gameObject.name += string.Format(" ({0})", index);
+            return index;
+        }
+
+        private static void MarchUpHierarchyForIndex(Transform transform, ref int index)
+        {
+            var siblingIndex = transform.GetSiblingIndex();
+            index += siblingIndex;
+                         
+                for(var i = 0; i <= siblingIndex; ++i)
+                {
+                    if(transform.parent)
+                    { 
+                        var child = transform.parent.GetChild(i);
+                        index += child.GetDeepChildCount();                    
+                        MarchUpHierarchyForIndex(transform.parent, ref index);
+                    }
+                    else
+                    {
+                        SceneManager.
+                    }
+                }
+            }
+        }
+
+        public static int GetDeepChildCount(this Transform transform)
+        {
+            int count = 0;
+            GetDeepChildCountRecursive(transform, ref count);
+            return count;
+        }
+
+        private static void GetDeepChildCountRecursive(Transform transform, ref int count)
+        {
+            foreach(Transform child in transform)
+            {
+                count++;
+                GetDeepChildCountRecursive(child, ref count);
+            }
+        }
+
         public static int GetHierarchyDepth(this Transform transform)
         {
             int depth = 0;

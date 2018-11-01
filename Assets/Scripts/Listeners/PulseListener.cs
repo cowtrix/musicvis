@@ -6,19 +6,18 @@ using MidiJack;
 
 public class PulseListener : IListener 
 {
-	public float Strength { get; private set; }
-
 	public float BPM;
-	public AnimationCurve PulseShape = AnimationCurve.Linear(0, 1, 1, 0);
-		
+	public AnimationCurve PulseShape = AnimationCurve.Linear(0, 1, 1, 0);		
 	float _timer;
 
-	public void Listen()
+	public void Listen(SmartValue value)
 	{
-		Strength = 0;
+		var strength = 0f;
 		_timer += Time.deltaTime;
 
 		var frac = Mathf.Clamp01(Mathfx.Frac((_timer / 60) * BPM));
-		Strength = PulseShape.Evaluate(frac);
+		strength = PulseShape.Evaluate(frac);
+
+		value.AddValue(strength);
 	}      
 }

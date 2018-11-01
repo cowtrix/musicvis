@@ -6,11 +6,8 @@ using MidiJack;
 
 public class InstantRMSListener : IListener 
 {
-	public float Strength { get { return Value.Value; } }
-	public SmartValue Value = new SmartValue(1);
-
-	public void Listen()
+	public void Listen(SmartValue value)
 	{
-		Value.AddValue(MusicManager.MusicState.RMS);
+		value.AddValue(MusicManager.MusicState.RMS);
 	}      
 }

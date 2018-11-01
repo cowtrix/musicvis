@@ -57,6 +57,9 @@
      <Compile Include="Assets\Custom Plugins\Common\Editor\InSceneScriptableObjectExplorer.cs" />
      <Compile Include="Assets\Custom Plugins\Common\Serialization\FullSerializer\Aot\Editor\fsAotConfigurationEditor.cs" />
      <Compile Include="Assets\Custom Plugins\MidiJack\Editor\MidiJackWindow.cs" />
+     <Compile Include="Assets\Klak\Syphon\Editor\SyphonClientEditor.cs" />
+     <Compile Include="Assets\Klak\Syphon\Editor\SyphonServerEditor.cs" />
+     <Compile Include="Assets\Klak\Syphon\Editor\SyphonServerListWindow.cs" />
      <Compile Include="Assets\PostProcessing\Editor\Attributes\PostProcessingModelEditorAttribute.cs" />
      <Compile Include="Assets\PostProcessing\Editor\Models\AmbientOcclusionModelEditor.cs" />
      <Compile Include="Assets\PostProcessing\Editor\Models\AntialiasingModelEditor.cs" />
@@ -92,7 +95,6 @@
      <Compile Include="Assets\PostProcessing\Editor\Utils\FxStyles.cs" />
      <Compile Include="Assets\PostProcessing\Editor\Utils\ReflectionUtils.cs" />
      <Compile Include="Assets\Scripts\Editor\ListenerGUI.cs" />
-     <Compile Include="Assets\Scripts\Editor\MusicVisualisationGUI.cs" />
      <Compile Include="Assets\Scripts\Editor\MutatorEffectGUI.cs" />
      <Compile Include="Assets\TSF\Editor\TSF.cs" />
  <Reference Include="UnityEditor.StandardEvents">

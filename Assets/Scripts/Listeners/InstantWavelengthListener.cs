@@ -7,11 +7,9 @@ using MidiJack;
 public class InstantWavelengthListener : IListener 
 {
 	public AnimationCurve Levels;
-	public float Strength { get { return Value.Value; } }
-	public SmartValue Value = new SmartValue(1);
 
-	public void Listen()
+	public void Listen(SmartValue value)
 	{
-		Value.AddValue(Levels.GetSumUnderWavelength(MusicManager.MusicState.Wavelength));
+		value.AddValue(Levels.GetSumUnderWavelength(MusicManager.MusicState.Wavelength));
 	}    
 }

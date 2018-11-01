@@ -12,13 +12,10 @@ public class ListenerGUI : Editor
 {
     public override void OnInspectorGUI()
     {
+        var listener = target as Listener;
         if(Application.isPlaying)
         {
-            var listener = target as Listener;
-            if(listener.CurrentListener != null)
-            {
-                EditorGUILayout.LabelField("Strength: " + listener.CurrentListener.Strength);
-            }
+            EditorGUILayout.LabelField("Strength: " + listener.Strength);
         }
         GenericEditor.DrawGUI(target);
     }

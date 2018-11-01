@@ -1,5 +1,4 @@
 public interface IListener
 {
-    void Listen();
-    float Strength { get; }
+    void Listen(SmartValue value);
 }
