@@ -9,6 +9,7 @@ public class Listener : MonoBehaviour, ISerializationCallbackReceiver
 {
 	public const int MIN_BUFFER = 1;
 	public const int MAX_BUFFER = 2000;
+	public string Name;
 
 	[SerializeField]
 	private IListener CurrentListener;
@@ -18,9 +19,22 @@ public class Listener : MonoBehaviour, ISerializationCallbackReceiver
 	[SerializeField][HideInInspector]
 	private DerivedComponentJsonDataRow ListenerJSON;
 
+	[Header("MIDI")]
 	public bool UseMidi;
 	public MidiChannel MidiChannel;
 	public int MidiIndex;
+	public FloatEvent SimplePipe;
+
+    public string GetName()
+    {
+        if(string.IsNullOrEmpty(Name))
+		{
+			return name;
+		}
+		return Name;
+    }
+
+    
 
     public float Strength 
 	{ 
@@ -56,6 +70,10 @@ public class Listener : MonoBehaviour, ISerializationCallbackReceiver
 	{
 		TryRegister();
 		Value.Tick(Time.deltaTime);
+		if(SimplePipe != null)
+		{
+			SimplePipe.Invoke(Value.GetValue());
+		}
 	}
 
     public void Tick()

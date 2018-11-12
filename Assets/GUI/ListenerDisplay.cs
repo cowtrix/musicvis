@@ -67,7 +67,7 @@ public class ListenerDisplay : MonoBehaviour
 
 	void Update()
 	{
-		Header.text = Target.name;
+		Header.text = Target.GetName();
 
 		var actual = Target.Strength;
 		Actual.fillAmount = actual;

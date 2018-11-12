@@ -57,6 +57,7 @@
      <Compile Include="Assets\Creations\Nuerons\Nuerons.cs" />
      <Compile Include="Assets\Creations\Spirals2\SpiralMover.cs" />
      <Compile Include="Assets\Creations\Spirals2\SpiralMoverConfiguration.cs" />
+     <Compile Include="Assets\Creations\SunsetOverdrive\PrefabRingArray.cs" />
      <Compile Include="Assets\Creations\Vine\Leaves\SpawnParticleWIthRotation.cs" />
      <Compile Include="Assets\Creations\WaveDisks\WaveDisks.cs" />
      <Compile Include="Assets\Creations\WavelengthSpiral\WavelengthSpiral.cs" />
@@ -261,6 +262,7 @@
      <Compile Include="Assets\Scripts\Utilities\SmartValue.cs" />
      <Compile Include="Assets\Scripts\Utilities\SpriteClip.cs" />
      <Compile Include="Assets\Scripts\Utilities\TrailRenderer3D.cs" />
+     <Compile Include="Assets\Scripts\Utilities\TrailRendererLocal.cs" />
      <Compile Include="Assets\Scripts\VisComponent.cs" />
      <None Include="Assets\Shaders\Horizontal Skybox.shader" />
      <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.shader" />

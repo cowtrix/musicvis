@@ -242,6 +242,8 @@ GameObject:
   - component: {fileID: 114581233576345534}
   - component: {fileID: 114259364167628820}
   - component: {fileID: 114275392086870732}
+  - component: {fileID: 223719960112407304}
+  - component: {fileID: 114215076557765678}
   m_Layer: 0
   m_Name: Listener
   m_TagString: Untagged
@@ -1498,6 +1500,22 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114215076557765678
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1160291525973388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &114221367411053824
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1688,7 +1706,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
-  m_MinWidth: 50
+  m_MinWidth: 100
   m_MinHeight: -1
   m_PreferredWidth: -1
   m_PreferredHeight: -1
@@ -1766,7 +1784,6 @@ MonoBehaviour:
   Target: {fileID: 0}
   Header: {fileID: 114723781234620848}
   MultiplierSlider: {fileID: 114734044121730536}
-  Raw: {fileID: 114306696602983508}
   Actual: {fileID: 114852490165454668}
   ValueDisplayGradient:
     serializedVersion: 2
@@ -3562,6 +3579,26 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1908986635148034}
   m_CullTransparentMesh: 0
+--- !u!223 &223719960112407304
+Canvas:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1160291525973388}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!224 &224004199720517720
 RectTransform:
   m_ObjectHideFlags: 1
@@ -4306,7 +4343,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224718896963519340
 RectTransform:

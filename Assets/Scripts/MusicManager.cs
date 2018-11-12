@@ -29,7 +29,7 @@ public class MusicManager : Singleton<MusicManager>
         _min = new SmartValue(1000);
         _max = new SmartValue(1000);
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
         foreach(var scene in Scenes)
         {
             SceneManager.LoadSceneAsync(scene.name, LoadSceneMode.Additive);

@@ -6,16 +6,16 @@ namespace MadMaps.Common
 {
     public static class EditorGUIX
     {
-        [MenuItem("Tools/Mad Maps/Documentation")]
-        public static void OpenDocumentation()
+        [MenuItem("CONTEXT/Transform/Log Hierarchy Index")]
+        public static void LogHierarchyIndex(MenuCommand command)
         {
-            Application.OpenURL("http://lrtw.net/madmaps/");
+            Debug.Log((command.context as Transform).GetHierarchyIndex());
         }
 
-        [MenuItem("Tools/Mad Maps/Contact Support")]
-        public static void ContactSupport()
+        [MenuItem("CONTEXT/Transform/Log Hierarchy Depth")]
+        public static void LogDepth(MenuCommand command)
         {
-            Application.OpenURL("mailto:seandgfinnegan+madmaps@gmail.com");
+            Debug.Log((command.context as Transform).GetDeepChildCount());
         }
 
         public static void PropertyField(Rect labelRect, Rect propertyRect, SerializedProperty property)

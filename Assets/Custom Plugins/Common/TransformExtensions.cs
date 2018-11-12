@@ -1,38 +1,39 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManager;
+using UnityEngine.SceneManagement;
 
 namespace MadMaps.Common
 {
     public static class TransformExtensions
     {
-
         
-        public static float GetHierarchyIndex(this Transform transform)
+        public static int GetHierarchyIndex(this Transform transform)
         {
             int index = 0;
             MarchUpHierarchyForIndex(transform, ref index);
-            transform.gameObject.name += string.Format(" ({0})", index);
             return index;
         }
 
         private static void MarchUpHierarchyForIndex(Transform transform, ref int index)
         {
             var siblingIndex = transform.GetSiblingIndex();
-            index += siblingIndex;
-                         
-                for(var i = 0; i <= siblingIndex; ++i)
+            index += siblingIndex + 1;
+            if(transform.parent)
+            {
+                for(var i = 0; i < siblingIndex; ++i)
                 {
-                    if(transform.parent)
-                    { 
-                        var child = transform.parent.GetChild(i);
-                        index += child.GetDeepChildCount();                    
-                        MarchUpHierarchyForIndex(transform.parent, ref index);
-                    }
-                    else
-                    {
-                        SceneManager.
-                    }
+                    var child = transform.parent.GetChild(i);
+                    index += child.GetDeepChildCount();                    
+                }
+                MarchUpHierarchyForIndex(transform.parent, ref index);
+            }
+            else
+            {
+                var rootObjs = SceneManager.GetActiveScene().GetRootGameObjects();
+                for(var i = 0; i < siblingIndex; ++i)
+                {
+                    var child = rootObjs[i].transform;
+                    index += child.GetDeepChildCount();
                 }
             }
         }

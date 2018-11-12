@@ -10,6 +10,9 @@ public class WaveDisks : MonoBehaviour {
 	List<Quaternion> _rotationHistory = new List<Quaternion>();
 	MaterialPropertyBlock _block;
 	public Vector3 Scale = Vector3.one;
+	public Gradient Color;
+	public float ColorTiling = 1;
+	public Vector2 Range = new Vector2(0, 1);
 	void Update()
 	{
 		if(_block == null){
@@ -26,6 +29,11 @@ public class WaveDisks : MonoBehaviour {
 
 		for(var i = 0; i < w.Length; i += Step)
 		{
+			var percent = i / (float)w.Length;
+			if(percent < Range.x)
+			{
+				continue;
+			}
 			var f = w[i];
 			var r = transform.rotation * Quaternion.Euler(MeshRotation);
 			if(i < _rotationHistory.Count)
@@ -37,7 +45,7 @@ public class WaveDisks : MonoBehaviour {
 			_block.SetFloat("_U", i / (float)w.Length);
 			_block.SetFloat("_Strength", f);
 			Random.InitState(i);
-			_block.SetColor("_Color", Random.ColorHSV(0, 1, 0.8f, 1f, 0.8f, 1f));
+			_block.SetColor("_Color", Color.Evaluate(Mathfx.Frac((i / ColorTiling))));
 			Graphics.DrawMesh(Mesh, trs, Material, 0, null, 0, _block);
 		}
 	}

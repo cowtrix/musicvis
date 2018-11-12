@@ -45,9 +45,9 @@ public class PlanetRenderer : MonoBehaviour {
 
         public void Render(Matrix4x4 localToWorldMatrix, Mesh mesh, Material material)
         {
-            var pos = localToWorldMatrix.MultiplyPoint3x4(Vector3.zero);
+            var pos = localToWorldMatrix.MultiplyPoint3x4(Position);
 			var rot = Quaternion.Euler(localToWorldMatrix.rotation * Rotation);
-			pos += rot * Position;
+			//pos += rot * Position;
 
 			var mat = Matrix4x4.TRS(pos, rot, Vector3.one * Scale);
 			Graphics.DrawMesh(mesh, mat, material, 0, null);

@@ -6,9 +6,16 @@ public class ScaleMutator : Mutator
 {
 	public Vector2 Scale = new Vector2(1, 2);
 	public float Multiplier = 1;
+
+	Vector3 _initialScale;
+
+	void Awake()
+	{
+		_initialScale = transform.localScale;
+	}
 	
 	protected override void TickInternal(float strength)
 	{
-		transform.localScale = (Vector3.one * Scale.x + Vector3.one * strength * (Scale.y - Scale.x)) * Multiplier;
+		transform.localScale = (_initialScale * Scale.x + _initialScale * strength * (Scale.y - Scale.x)) * Multiplier;
 	}
 }

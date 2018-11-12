@@ -7,6 +7,7 @@ public class RotationMutator : Mutator
 	public Vector3 Axis;
 	public bool RandomiseOnStart;
 	public float Wander;
+	public bool Local = true;
 
 
 	[ContextMenu("Randomise")]
@@ -25,7 +26,14 @@ public class RotationMutator : Mutator
 	
 	protected override void TickInternal(float strength)
 	{
-		transform.localRotation *= Quaternion.Euler(strength * Axis);
+		if(Local)
+		{
+			transform.localRotation *= Quaternion.Euler(strength * Axis);
+		}	
+		else{
+			transform.rotation *= Quaternion.Euler(strength * Axis);
+		}	
+		
 		if(Wander != 0)
 		{
 			Axis = (Axis + (Random.onUnitSphere * Wander)).normalized * Axis.magnitude;

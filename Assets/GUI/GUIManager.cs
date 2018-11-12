@@ -39,7 +39,7 @@ public class GUIManager : Singleton<GUIManager>
 	void RefreshToggles()
 	{
 		_toggleListDirty = false;
-		_listeners = _listeners.OrderByDescending((x) => x.transform.GetHierarchyIndex()).ToList();
+		_listeners = _listeners.OrderBy((x) => x.transform.GetHierarchyIndex()).ToList();
 		for(var i = 0; i < _listeners.Count; ++i)
 		{
 			var listener = _listeners[i];

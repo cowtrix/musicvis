@@ -4,6 +4,7 @@ using System.Collections;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace MadMaps.Common.GenericEditor
 {
@@ -24,6 +25,24 @@ namespace MadMaps.Common.GenericEditor
             return DrawGUIInternal((T)target, label, targetType, fieldInfo, context);
         }
         protected abstract T DrawGUIInternal(T target, string label = "", Type targetType = null, FieldInfo fieldInfo = null, object context = null); 
+    }
+
+    public abstract class UnityEventDrawer<T> : GenericDrawer<UnityEvent<T>>
+    {
+        protected override UnityEvent<T> DrawGUIInternal(UnityEvent<T> target, string label = "", Type targetType = null, FieldInfo fieldInfo = null,
+            object context = null)
+        {
+            SerializedObject serializedObject = new SerializedObject(context as UnityEngine.Object);
+            serializedObject.Update();
+            SerializedProperty sProp = serializedObject.FindProperty(fieldInfo.Name);
+            EditorGUILayout.PropertyField(sProp);               
+            serializedObject.ApplyModifiedProperties();
+            return target;
+        }
+    }
+
+    public class FloatEventDrawer : UnityEventDrawer<float>
+    {        
     }
 
     public class FloatDrawer : GenericDrawer<float>
