@@ -25,7 +25,11 @@ public class GUIManager : Singleton<GUIManager>
 			return;
 		}
 		_listeners.Add(listener);
-		_toggleListDirty = true;
+		if(!listener.Hidden)
+		{
+			_toggleListDirty = true;
+		}
+		
 	}
 
 	void Update()
@@ -39,19 +43,26 @@ public class GUIManager : Singleton<GUIManager>
 	void RefreshToggles()
 	{
 		_toggleListDirty = false;
-		_listeners = _listeners.OrderBy((x) => x.transform.GetHierarchyIndex()).ToList();
+		_listeners = _listeners.Where((x)=>x).OrderBy((x) => x.transform.GetHierarchyIndex()).ToList();
+		int counter = 0;
 		for(var i = 0; i < _listeners.Count; ++i)
 		{
 			var listener = _listeners[i];
-			if(i <= _toggles.Count)
+			if(listener.Hidden)
+			{
+				continue;
+			}
+			
+			if(counter <= _toggles.Count)
 			{
 				var newToggle = Instantiate(TogglePrefab.gameObject).GetComponent<ListenerToggle>();
 				newToggle.transform.SetParent(ToggleContainer);
 				_toggles.Add(newToggle);
 			}
-			var t = _toggles[i];
+			var t = _toggles[counter];
 			t.gameObject.SetActive(true);
-			t.SetTarget(listener);			
+			t.SetTarget(listener);	
+			counter++;		
 		}
 		for(var i = _listeners.Count; i < _toggles.Count; ++i)
 		{

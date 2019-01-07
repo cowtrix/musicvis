@@ -14,6 +14,7 @@ public class Listener : MonoBehaviour, ISerializationCallbackReceiver
 	[SerializeField]
 	private IListener CurrentListener;
 	public SmartValue Value;
+	public bool Hidden;
 	
 
 	[SerializeField][HideInInspector]

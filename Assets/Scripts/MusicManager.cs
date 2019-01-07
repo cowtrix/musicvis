@@ -80,9 +80,14 @@ public class MusicManager : Singleton<MusicManager>
         Shader.SetGlobalTexture("_Wavelength", WavelengthTexture);
         Shader.SetGlobalTexture("_Delta", WavelengthTexture);
 
-        foreach(var listener in _listeners)
+        for(var i = _listeners.Count - 1; i >= 0; --i)
         {
-            listener.Tick();
+            if(_listeners[i] == null)
+            {
+                _listeners.RemoveAt(i);
+                continue;
+            }
+            _listeners[i].Tick();          
         }
     }
 

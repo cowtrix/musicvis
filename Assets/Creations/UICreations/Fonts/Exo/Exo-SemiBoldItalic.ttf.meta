@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: a1cb9bec67b363e43bcfd2d41c69e13b
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Exo SemiBold
+  fontNames:
+  - Exo SemiBold
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 6be82897a5926174c9a92259de78b7e0, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
